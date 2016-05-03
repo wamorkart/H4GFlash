@@ -1,4 +1,8 @@
 <lcgdict>
 	<class name="std::vector<std::map<std::string,float>>"/>
         <class name="std::vector<std::map<std::string,int>>"/>
+	<class name="H4GTools::H4G_DiPhoton"/>
+	<class name="std::vector<H4GTools::H4G_DiPhoton>"/>
+	<class name="H4GTools::H4G_TetraPhoton"/>
+	<class name="std::vector<H4GTools::H4G_TetraPhoton>"/>
 </lcgdict>

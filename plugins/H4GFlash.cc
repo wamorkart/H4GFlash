@@ -35,6 +35,7 @@
 #include <cmath>
 #include "TTree.h"
 #include "TFile.h"
+#include "TLorentzVector.h"
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 #include "DataFormats/PatCandidates/interface/PackedGenParticle.h"
@@ -46,6 +47,7 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/Math/interface/deltaR.h"
+#include "flashgg/H4GFlash/interface/H4GTools.h"
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
@@ -57,12 +59,6 @@
 #include "flashgg/DataFormats/interface/Jet.h"
 #include "flashgg/Taggers/interface/GlobalVariablesDumper.h"
 
-
-#ifdef _CINT_
-#pragma link C++ class std::vector<std::map<std::string,float>>;
-#pragma link C++ class std::vector<std::map<std::string,int>>;
-//#pragma link C++ struct H4GFlash::H4GDiPhoton;
-#endif
 
 //
 // class declaration
@@ -86,15 +82,11 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       edm::EDGetTokenT<edm::View<flashgg::DiPhotonCandidate> > diphotonsToken_;
       edm::EDGetTokenT<edm::View<pat::PackedGenParticle> > genPhotonsToken_;
 
-//      struct H4GDiPhoton{
-//	LorentzVector p4;
-//	int p1;
-//	int p2;
-//      };
-
       //Out tree elements:
       TTree* outTree;
       int n_pho, run, lumi, evtnum;
+      std::vector<H4GTools::H4G_DiPhoton> v_h4g_diphos;
+      std::vector<H4GTools::H4G_TetraPhoton> v_h4g_tetraphos;
       std::vector<LorentzVector> v_pho_p4;
       std::vector<LorentzVector> v_genpho_p4;
       std::vector<int> v_genpho_motherpdgid;
@@ -139,6 +131,8 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("lumi", &lumi, "lumi/I");
    outTree->Branch("evtnum", &evtnum, "evtnum/I");
 
+   outTree->Branch("v_h4g_diphos", &v_h4g_diphos);
+   outTree->Branch("v_h4g_tetraphos", &v_h4g_tetraphos);
    outTree->Branch("n_pho", &n_pho, "n_pho/I");
    outTree->Branch("v_pho_p4", &v_pho_p4);
    outTree->Branch("v_genpho_p4", &v_genpho_p4);
@@ -197,6 +191,8 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_pho_deta.clear();
    v_pho_cutid.clear();
    v_pho_mva.clear();
+   v_h4g_diphos.clear();
+   v_h4g_tetraphos.clear();
 
    std::vector<const flashgg::Photon*> phosTemp;
 
@@ -269,8 +265,8 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       std::vector<float> vecDR;
       std::vector<float> vecDPhi;
       std::vector<float> vecDEta;
-      for ( size_t p2 = 0; p < v_pho_p4.size(); p++) {
-         LorentzVector pho2 = v_pho_p4[p];
+      for ( size_t p2 = 0; p2 < v_pho_p4.size(); p2++) {
+         LorentzVector pho2 = v_pho_p4[p2];
          float deltar = 0;
          float deltaphi = 0;
          float deltaeta = 0;
@@ -283,14 +279,63 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
             deltar = deltaR(pho, pho2);
             deltaphi = deltaPhi(pho.phi(), pho2.phi());
             deltar = fabs(pho.eta() - pho2.eta());
+	 }
+
+	 if( p2 > p ){
+            H4GTools::H4G_DiPhoton thisH4GDipho;
+	    LorentzVector Sum = pho+pho2;
+	    std::cout << "Sum.M " << Sum.M() << endl;
+            thisH4GDipho.p4 = Sum;
+            thisH4GDipho.ip1 = p;
+            thisH4GDipho.ip2 = p2;
+	    thisH4GDipho.SumPt = pho.pt() + pho2.pt();
+            if( pho.pt() < pho2.pt()){   
+               thisH4GDipho.ip1 = p2;
+               thisH4GDipho.ip2 = p;
+            }
+	    v_h4g_diphos.push_back(thisH4GDipho);
          }
          vecDR.push_back(deltar);
          vecDPhi.push_back(deltaphi);
          vecDEta.push_back(deltaeta);
+
       }
       v_pho_dr.push_back(vecDR);
       v_pho_dphi.push_back(vecDPhi);
       v_pho_deta.push_back(vecDEta);
+   }
+
+   //Make tetraphotons
+   for( size_t q1 = 0; q1 < v_h4g_diphos.size(); q1++) {
+      H4GTools::H4G_DiPhoton Dipho1 = v_h4g_diphos[q1];
+         for( size_t q2 = q1+1; q2 < v_h4g_diphos.size(); q2++) {
+            H4GTools::H4G_DiPhoton Dipho2 = v_h4g_diphos[q2];
+	    if ( Dipho1.ip1 == Dipho2.ip1
+		 || Dipho1.ip1 == Dipho2.ip2
+		 || Dipho1.ip2 == Dipho2.ip1
+		 || Dipho1.ip2 == Dipho2.ip2 ) continue;
+
+	    H4GTools::H4G_TetraPhoton thisTetra;
+	    thisTetra.p4 = Dipho1.p4 + Dipho2.p4;
+            thisTetra.idp1 = q1;
+            thisTetra.idp2 = q2;
+	    thisTetra.ip1 = Dipho1.ip1;
+	    thisTetra.ip2 = Dipho1.ip2;
+	    thisTetra.ip3 = Dipho2.ip1;
+	    thisTetra.ip4 = Dipho2.ip2;
+	    thisTetra.SumPt = Dipho1.SumPt + Dipho2.SumPt;
+	    if( Dipho1.p4.pt() < Dipho2.p4.pt()) {
+               thisTetra.idp1 = q2;
+               thisTetra.idp2 = q1;
+	       thisTetra.ip1 = Dipho2.ip1;
+	       thisTetra.ip2 = Dipho2.ip2;
+	       thisTetra.ip3 = Dipho1.ip1;
+	       thisTetra.ip4 = Dipho1.ip2;
+	    }
+
+	    v_h4g_tetraphos.push_back(thisTetra);
+         }
+
    }
 
    // Save prompt photon gen information
