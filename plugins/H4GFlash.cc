@@ -81,6 +81,7 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       typedef math::XYZTLorentzVector LorentzVector;
       edm::EDGetTokenT<edm::View<flashgg::DiPhotonCandidate> > diphotonsToken_;
       edm::EDGetTokenT<edm::View<pat::PackedGenParticle> > genPhotonsToken_;
+      long int counter;
 
       //Out tree elements:
       TTree* outTree;
@@ -147,6 +148,7 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("v_pho_cutid", &v_pho_cutid);
    outTree->Branch("v_pho_mva", &v_pho_mva);
 
+   counter = 0;
 }
 
 
@@ -167,6 +169,10 @@ H4GFlash::~H4GFlash()
 void
 H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+
+   if(counter%1000) std::cout << "[H4GFlash::analyzer] Analyzing event #" << counter << std::endl;
+   counter++;
+
    using namespace edm;
 
    run = iEvent.id().run();
@@ -284,7 +290,6 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 	 if( p2 > p ){
             H4GTools::H4G_DiPhoton thisH4GDipho;
 	    LorentzVector Sum = pho+pho2;
-	    std::cout << "Sum.M " << Sum.M() << endl;
             thisH4GDipho.p4 = Sum;
             thisH4GDipho.ip1 = p;
             thisH4GDipho.ip2 = p2;
