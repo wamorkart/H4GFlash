@@ -48,6 +48,8 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/Math/interface/deltaR.h"
 #include "flashgg/H4GFlash/interface/H4GTools.h"
+#include "FWCore/Common/interface/TriggerNames.h"
+#include "DataFormats/Common/interface/TriggerResults.h"
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
@@ -59,6 +61,7 @@
 #include "flashgg/DataFormats/interface/Jet.h"
 #include "flashgg/Taggers/interface/GlobalVariablesDumper.h"
 
+bool DEBUG = 0;
 
 //
 // class declaration
@@ -81,11 +84,12 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       typedef math::XYZTLorentzVector LorentzVector;
       edm::EDGetTokenT<edm::View<flashgg::DiPhotonCandidate> > diphotonsToken_;
       edm::EDGetTokenT<edm::View<pat::PackedGenParticle> > genPhotonsToken_;
+      edm::EDGetTokenT<edm::TriggerResults> triggerToken_;
       long int counter;
 
       //Out tree elements:
       TTree* outTree;
-      int n_pho, run, lumi, evtnum;
+      int n_pho, run, lumi, evtnum, passTrigger;
       std::vector<H4GTools::H4G_DiPhoton> v_h4g_diphos;
       std::vector<H4GTools::H4G_TetraPhoton> v_h4g_tetraphos;
       std::vector<LorentzVector> v_pho_p4;
@@ -100,6 +104,9 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<std::vector<float>> v_pho_deta;
       std::vector<std::map<std::string, int>> v_pho_cutid;
       std::vector<float> v_pho_mva;
+
+      //Parameters
+      std::vector<std::string> myTriggers;
 
    private:
       virtual void beginJob() override;
@@ -132,6 +139,7 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("lumi", &lumi, "lumi/I");
    outTree->Branch("evtnum", &evtnum, "evtnum/I");
 
+   outTree->Branch("passTrigger", &passTrigger, "passTrigger/I");
    outTree->Branch("v_h4g_diphos", &v_h4g_diphos);
    outTree->Branch("v_h4g_tetraphos", &v_h4g_tetraphos);
    outTree->Branch("n_pho", &n_pho, "n_pho/I");
@@ -149,6 +157,14 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("v_pho_mva", &v_pho_mva);
 
    counter = 0;
+
+   //Get parameters
+   std::vector<std::string> def_myTriggers;
+   triggerToken_ = consumes<edm::TriggerResults>( iConfig.getParameter<edm::InputTag>( "triggerTag" ) );
+   myTriggers = iConfig.getUntrackedParameter<std::vector<std::string> >("myTriggers", def_myTriggers);
+   std::cout << "Analyzing events with the following triggers:" << std::endl;
+   for ( size_t i = 0; i < myTriggers.size(); i++)
+      std::cout << "\t" << myTriggers[i] << std::endl;
 }
 
 
@@ -170,7 +186,7 @@ void
 H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
-   if(counter%1000) std::cout << "[H4GFlash::analyzer] Analyzing event #" << counter << std::endl;
+   if(counter%1000 == 0) std::cout << "[H4GFlash::analyzer] Analyzing event #" << counter << std::endl;
    counter++;
 
    using namespace edm;
@@ -183,6 +199,24 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    iEvent.getByToken(diphotonsToken_, diphotons);
    Handle<edm::View<pat::PackedGenParticle> > genPhotons;
    iEvent.getByToken(genPhotonsToken_,genPhotons);
+
+    //Trigger
+    std::map<std::string, int> myTriggerResults;
+    if(myTriggers.size() > 0){
+        Handle<edm::TriggerResults> trigResults;
+        iEvent.getByToken(triggerToken_, trigResults);
+        const edm::TriggerNames &names = iEvent.triggerNames(*trigResults);
+        myTriggerResults = H4GTools::TriggerSelection(myTriggers, names, trigResults);
+    }
+
+    int acceptedTriggers = 0;
+    for(std::map<std::string, int>::iterator it = myTriggerResults.begin(); it != myTriggerResults.end(); it++){
+      if(DEBUG) std::cout << "Trigger name: " << it->first << "\n \t Decision: " << it->second << std::endl;
+      if(it->second) acceptedTriggers++;
+    }
+
+    if(acceptedTriggers) passTrigger = 1;
+    if(!acceptedTriggers) passTrigger = 0;
 
    //Initialize tree variables
    n_pho = 0;
