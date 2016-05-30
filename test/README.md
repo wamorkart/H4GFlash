@@ -13,10 +13,10 @@ fggManageSamples.py -C <Campaign> -V <flashgg version> import #(1)
 fggManageSamples.py -C <Campaign> -V <flashgg version> review #(2)
 fggManageSamples.py -C <Campaign> -V <flashgg version> check #(3)
 ```   
-- Campaign and flashgg version are the ones used during the MicroAOD production step   
-(1): Creates dataset entry (folder under MetaData/data/ with dataset.json with list of files)   
-(2): Check for duplicates, select datasets you want (or include all)   
-(3): Calculate weights, import number of events, etc   
+- Campaign and flashgg version are the ones used during the MicroAOD production step    
+- (1): Creates dataset entry (folder under MetaData/data/ with dataset.json with list of files)    
+- (2): Check for duplicates, select datasets you want (or include all)    
+- (3): Calculate weights, import number of events, etc    
 
 #### 2) Only once: prepare json file with list of datasets to run on   
 ```
@@ -45,7 +45,7 @@ File should look like this:
 mkdir outDir
 fggRunJobs.py --load ToRun.json -H -D -P -n 500 -d outDir -x cmsRun ../MakeTrees.py maxEvents=-1 -q 1nh --no-use-tarball
 ```   
-This will submit all the jobs to lxbatch and start a monitoring task. After all jobs have been submitted, feel free to quit it if you want. However, living it running will also resubmit jobs that fail for lxbatch reasons. You can continue the monitoring task with:   
+This will submit all the jobs to lxbatch and start a monitoring task. After all jobs have been submitted, feel free to quit it if you want. However, leaving it running will also resubmit jobs that fail for lxbatch reasons. You can continue the monitoring task with:   
 ```
 fggRunJobs.py --load outDir/configs.json --cont
 ```
