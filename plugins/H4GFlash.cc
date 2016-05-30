@@ -104,9 +104,12 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<std::vector<float>> v_pho_deta;
       std::vector<std::map<std::string, int>> v_pho_cutid;
       std::vector<float> v_pho_mva;
+      std::map<std::string, int> myTriggerResults;
 
       //Parameters
       std::vector<std::string> myTriggers;
+
+      std::map<std::string, int> triggerStats;
 
    private:
       virtual void beginJob() override;
@@ -155,6 +158,7 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("v_pho_deta", &v_pho_deta);
    outTree->Branch("v_pho_cutid", &v_pho_cutid);
    outTree->Branch("v_pho_mva", &v_pho_mva);
+   outTree->Branch("myTriggerResults", &myTriggerResults);
 
    counter = 0;
 
@@ -201,7 +205,7 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    iEvent.getByToken(genPhotonsToken_,genPhotons);
 
     //Trigger
-    std::map<std::string, int> myTriggerResults;
+    myTriggerResults.clear();
     if(myTriggers.size() > 0){
         Handle<edm::TriggerResults> trigResults;
         iEvent.getByToken(triggerToken_, trigResults);
@@ -213,6 +217,12 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     for(std::map<std::string, int>::iterator it = myTriggerResults.begin(); it != myTriggerResults.end(); it++){
       if(DEBUG) std::cout << "Trigger name: " << it->first << "\n \t Decision: " << it->second << std::endl;
       if(it->second) acceptedTriggers++;
+      std::map<std::string, int>::iterator finder;
+      finder = triggerStats.find(it->first);
+      if( finder != triggerStats.end() )
+         triggerStats[it->first] += it->second;
+      if( finder == triggerStats.end() )
+	 triggerStats[it->first] =  it->second;
     }
 
     if(acceptedTriggers) passTrigger = 1;
@@ -411,6 +421,14 @@ H4GFlash::beginJob()
 void 
 H4GFlash::endJob() 
 {
+
+   std::cout << "============== Job stats ==============" << std::endl;
+   std::cout << "\t Total number of events: " << counter << std::endl;
+   std::cout << "\t Trigger stats: " << std::endl;
+   for( std::map<std::string, int>::iterator it = triggerStats.begin(); it != triggerStats.end(); it++)
+	std::cout << "\t  - " << it->first << " \t - Accepted events: " << it->second << std::endl;
+   std::cout << "============== End stats ==============" << std::endl;
+
 }
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
