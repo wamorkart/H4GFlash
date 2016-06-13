@@ -14,6 +14,7 @@ small test:
     H4GTree->Draw("v_h4g_tetraphos.p4.M()");
     H4GTree->Draw("v_h4g_tetraphos.p4.M()","@v_h4g_tetraphos.size() == 3");
     
+    H4GTree->Draw("v_pho_chargedHadronIso");
 
 ## Run all jobs
 

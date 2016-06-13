@@ -99,6 +99,34 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<float> v_pho_eta;
       std::vector<float> v_pho_phi;
       std::vector<float> v_pho_e;
+      
+      //---- Inputs defined here:
+      //     http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/interface/Photon.h
+      //     http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/src/Photon.cc
+      // photon ids and cluster variables
+      std::vector<float> v_pho_hadronicOverEm;  
+      std::vector<float> v_pho_chargedHadronIso; 
+      std::vector<float> v_pho_neutralHadronIso; 
+      std::vector<float> v_pho_photonIso; 
+      std::vector<float> v_pho_passElectronVeto; 
+      std::vector<float> v_pho_hasPixelSeed; 
+      std::vector<float> v_pho_ecalPFClusterIso; 
+      std::vector<float> v_pho_hcalPFClusterIso; 
+      std::vector<float> v_pho_eMax; 
+      std::vector<float> v_pho_e3x3; 
+      std::vector<float> v_pho_subClusRawE1; 
+      std::vector<float> v_pho_subClusDPhi1; 
+      std::vector<float> v_pho_subClusDEta1; 
+      std::vector<float> v_pho_subClusRawE2; 
+      std::vector<float> v_pho_subClusDPhi2; 
+      std::vector<float> v_pho_subClusDEta2; 
+      std::vector<float> v_pho_subClusRawE3; 
+      std::vector<float> v_pho_subClusDPhi3; 
+      std::vector<float> v_pho_subClusDEta3; 
+      std::vector<float> v_pho_iPhi; 
+      std::vector<float> v_pho_iEta; 
+            
+      
       std::vector<std::vector<float>> v_pho_dr;
       std::vector<std::vector<float>> v_pho_dphi;
       std::vector<std::vector<float>> v_pho_deta;
@@ -153,6 +181,29 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("v_pho_eta", &v_pho_eta);
    outTree->Branch("v_pho_phi", &v_pho_phi);
    outTree->Branch("v_pho_e", &v_pho_e);
+   
+   outTree->Branch("v_pho_hadronicOverEm",   &v_pho_hadronicOverEm  );
+   outTree->Branch("v_pho_chargedHadronIso", &v_pho_chargedHadronIso);
+   outTree->Branch("v_pho_neutralHadronIso", &v_pho_neutralHadronIso);
+   outTree->Branch("v_pho_photonIso",        &v_pho_photonIso );
+   outTree->Branch("v_pho_passElectronVeto", &v_pho_passElectronVeto);
+   outTree->Branch("v_pho_hasPixelSeed",     &v_pho_hasPixelSeed );
+   outTree->Branch("v_pho_ecalPFClusterIso", &v_pho_ecalPFClusterIso);
+   outTree->Branch("v_pho_hcalPFClusterIso", &v_pho_hcalPFClusterIso);
+   outTree->Branch("v_pho_eMax",             &v_pho_eMax );
+   outTree->Branch("v_pho_e3x3",             &v_pho_e3x3 );
+   outTree->Branch("v_pho_subClusRawE1",     &v_pho_subClusRawE1 );
+   outTree->Branch("v_pho_subClusDPhi1",     &v_pho_subClusDPhi1 );
+   outTree->Branch("v_pho_subClusDEta1",     &v_pho_subClusDEta1 );
+   outTree->Branch("v_pho_subClusRawE2",     &v_pho_subClusRawE2 );
+   outTree->Branch("v_pho_subClusDPhi2",     &v_pho_subClusDPhi2 );
+   outTree->Branch("v_pho_subClusDEta2",     &v_pho_subClusDEta2 );
+   outTree->Branch("v_pho_subClusRawE3",     &v_pho_subClusRawE3 );
+   outTree->Branch("v_pho_subClusDPhi3",     &v_pho_subClusDPhi3 );
+   outTree->Branch("v_pho_subClusDEta3",     &v_pho_subClusDEta3 );
+   outTree->Branch("v_pho_iPhi",             &v_pho_iPhi );
+   outTree->Branch("v_pho_iEta",             &v_pho_iEta );
+    
    outTree->Branch("v_pho_dr", &v_pho_dr);
    outTree->Branch("v_pho_dphi", &v_pho_dphi);
    outTree->Branch("v_pho_deta", &v_pho_deta);
@@ -243,7 +294,31 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_pho_mva.clear();
    v_h4g_diphos.clear();
    v_h4g_tetraphos.clear();
-
+ 
+   v_pho_hadronicOverEm.clear();  
+   v_pho_chargedHadronIso.clear(); 
+   v_pho_neutralHadronIso.clear(); 
+   v_pho_photonIso.clear(); 
+   v_pho_passElectronVeto.clear(); 
+   v_pho_hasPixelSeed.clear(); 
+   v_pho_ecalPFClusterIso.clear(); 
+   v_pho_hcalPFClusterIso.clear(); 
+   v_pho_eMax.clear(); 
+   v_pho_e3x3.clear(); 
+   v_pho_subClusRawE1.clear(); 
+   v_pho_subClusDPhi1.clear(); 
+   v_pho_subClusDEta1.clear(); 
+   v_pho_subClusRawE2.clear(); 
+   v_pho_subClusDPhi2.clear(); 
+   v_pho_subClusDEta2.clear(); 
+   v_pho_subClusRawE3.clear(); 
+   v_pho_subClusDPhi3.clear(); 
+   v_pho_subClusDEta3.clear(); 
+   v_pho_iPhi.clear(); 
+   v_pho_iEta.clear(); 
+   
+   
+   
    std::vector<const flashgg::Photon*> phosTemp;
 
    // Loop over diphotons
@@ -307,6 +382,29 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      v_pho_p4.push_back( thisPhoV4 );
      v_pho_mva.push_back( pho->userFloat("PhotonMVAEstimatorRun2Spring15NonTrig25nsV2p1Values") );
  
+     v_pho_hadronicOverEm.push_back    ( pho->hadronicOverEm() );  
+     v_pho_chargedHadronIso.push_back  ( pho->chargedHadronIso() ); 
+     v_pho_neutralHadronIso.push_back  ( pho->neutralHadronIso() ); 
+     v_pho_photonIso.push_back         ( pho->photonIso() ); 
+     v_pho_passElectronVeto.push_back  ( pho->passElectronVeto() ); 
+     v_pho_hasPixelSeed.push_back      ( pho->hasPixelSeed() ); 
+     v_pho_ecalPFClusterIso.push_back  ( pho->ecalPFClusterIso() ); 
+     v_pho_hcalPFClusterIso.push_back  ( pho->hcalPFClusterIso() ); 
+     v_pho_eMax.push_back              ( pho->eMax() ); 
+     v_pho_e3x3.push_back              ( pho->e3x3() ); 
+     v_pho_subClusRawE1.push_back      ( pho->subClusRawE1() ); 
+     v_pho_subClusDPhi1.push_back      ( pho->subClusDPhi1() ); 
+     v_pho_subClusDEta1.push_back      ( pho->subClusDEta1() ); 
+     v_pho_subClusRawE2.push_back      ( pho->subClusRawE2() ); 
+     v_pho_subClusDPhi2.push_back      ( pho->subClusDPhi2() ); 
+     v_pho_subClusDEta2.push_back      ( pho->subClusDEta2() ); 
+     v_pho_subClusRawE3.push_back      ( pho->subClusRawE3() ); 
+     v_pho_subClusDPhi3.push_back      ( pho->subClusDPhi3() ); 
+     v_pho_subClusDEta3.push_back      ( pho->subClusDEta3() ); 
+     v_pho_iPhi.push_back              ( pho->iPhi() ); 
+     v_pho_iEta.push_back              ( pho->iEta() ); 
+     
+     
    }
 
    // Save delta r between selected photons
