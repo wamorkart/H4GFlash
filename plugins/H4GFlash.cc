@@ -84,6 +84,8 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       typedef math::XYZTLorentzVector LorentzVector;
       edm::EDGetTokenT<edm::View<flashgg::DiPhotonCandidate> > diphotonsToken_;
       edm::EDGetTokenT<edm::View<pat::PackedGenParticle> > genPhotonsToken_;
+      edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesToken_;
+      
       edm::EDGetTokenT<edm::TriggerResults> triggerToken_;
       long int counter;
 
@@ -100,6 +102,19 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<float> v_pho_phi;
       std::vector<float> v_pho_e;
       
+      std::vector<float> v_gen_a_mass;
+      std::vector<float> v_gen_a_id;
+      std::vector<float> v_gen_a_pt;
+      std::vector<float> v_gen_a_eta;
+      std::vector<float> v_gen_a_phi;
+      
+      std::vector<float> v_gen_X_mass;
+      std::vector<float> v_gen_X_id;
+      std::vector<float> v_gen_X_pt;
+      std::vector<float> v_gen_X_eta;
+      std::vector<float> v_gen_X_phi;
+      
+
       //---- Inputs defined here:
       //     http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/interface/Photon.h
       //     http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/src/Photon.cc
@@ -159,8 +174,9 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
 // constructors and destructor
 //
 H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
-diphotonsToken_( consumes<edm::View<flashgg::DiPhotonCandidate> >( iConfig.getUntrackedParameter<edm::InputTag> ( "diphotons", edm::InputTag( "flashggDiPhotons" ) ) ) ),
-genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntrackedParameter<edm::InputTag>( "genphotons", edm::InputTag( "prunedGenParticles" ) ) ) )
+    diphotonsToken_( consumes<edm::View<flashgg::DiPhotonCandidate> >( iConfig.getUntrackedParameter<edm::InputTag> ( "diphotons", edm::InputTag( "flashggDiPhotons" ) ) ) ),
+    genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntrackedParameter<edm::InputTag>( "genphotons", edm::InputTag( "prunedGenParticles" ) ) ) ),
+    genParticlesToken_( consumes<edm::View<reco::GenParticle> >( iConfig.getUntrackedParameter<edm::InputTag>( "genparticles", edm::InputTag( "prunedGenParticles" ) ) ) )
 {
    //now do what ever initialization is needed
    usesResource("TFileService");
@@ -204,6 +220,17 @@ genPhotonsToken_( consumes<edm::View<pat::PackedGenParticle> >( iConfig.getUntra
    outTree->Branch("v_pho_iPhi",             &v_pho_iPhi );
    outTree->Branch("v_pho_iEta",             &v_pho_iEta );
     
+   outTree->Branch("v_gen_a_mass",           &v_gen_a_mass );
+   outTree->Branch("v_gen_a_id",             &v_gen_a_id );
+   outTree->Branch("v_gen_a_pt",             &v_gen_a_pt );
+   outTree->Branch("v_gen_a_eta",            &v_gen_a_eta );
+   outTree->Branch("v_gen_a_phi",            &v_gen_a_phi );
+   outTree->Branch("v_gen_X_mass",           &v_gen_X_mass );
+   outTree->Branch("v_gen_X_id",             &v_gen_X_id );
+   outTree->Branch("v_gen_X_pt",             &v_gen_X_pt );
+   outTree->Branch("v_gen_X_eta",            &v_gen_X_eta );
+   outTree->Branch("v_gen_X_phi",            &v_gen_X_phi );
+   
    outTree->Branch("v_pho_dr", &v_pho_dr);
    outTree->Branch("v_pho_dphi", &v_pho_dphi);
    outTree->Branch("v_pho_deta", &v_pho_deta);
@@ -252,9 +279,12 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
    edm::Handle<edm::View<flashgg::DiPhotonCandidate> > diphotons;
    iEvent.getByToken(diphotonsToken_, diphotons);
-   Handle<edm::View<pat::PackedGenParticle> > genPhotons;
+   edm::Handle<edm::View<pat::PackedGenParticle> > genPhotons;
    iEvent.getByToken(genPhotonsToken_,genPhotons);
 
+   edm::Handle<edm::View<reco::GenParticle> > genParticles;
+   iEvent.getByToken(genParticlesToken_,genParticles);
+      
     //Trigger
     myTriggerResults.clear();
     if(myTriggers.size() > 0){
@@ -316,6 +346,19 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_pho_subClusDEta3.clear(); 
    v_pho_iPhi.clear(); 
    v_pho_iEta.clear(); 
+   
+   
+   v_gen_a_mass.clear();
+   v_gen_a_id.clear();
+   v_gen_a_pt.clear();
+   v_gen_a_eta.clear();
+   v_gen_a_phi.clear();
+   v_gen_X_mass.clear();
+   v_gen_X_id.clear();
+   v_gen_X_pt.clear();
+   v_gen_X_eta.clear();
+   v_gen_X_phi.clear();
+   
    
    
    
@@ -492,17 +535,52 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       //Only save gen information of prompt+final state photons (this includes FSR/ISR)
       if( gen->isPromptFinalState() == 0 ) continue;
 
+      //---- stable and ready to be propagated via Geant4
+//       if( gen->status() == 1 ) continue;
+      
+      
       //Only save photons
       if( gen->pdgId() != 22 ) continue;
 
       v_genpho_p4.push_back( gen->p4() );
 
-//      int motherPDGID = -999;
-//      if( gen->mother() ) motherPDGID = gen->mother()->pdgId();
-//      v_genpho_motherpdgid.push_back(motherPDGID);
+//       int motherPDGID = -999;
+//       const reco::Candidate* pMother = 0;
+//       std::cout << " g[" << 0 << "] gen->numberOfMothers() = " << gen->numberOfMothers() << std::endl;
+//       
+//       if (gen->numberOfMothers() >= 1) {
+//         pMother = gen->mother(0);
+//         motherPDGID = pMother->pdgId();
+//       }
+//       v_genpho_motherpdgid.push_back(motherPDGID);
 
    }
    
+   //---- Loop over gen particles
+   for (size_t gp=0; gp<genParticles->size(); ++gp) {
+
+     const auto gen = genParticles->ptrAt(gp);
+     
+     int type = gen->pdgId();
+     
+     if ( abs(type) == 25 ) { //---- a
+       v_gen_a_mass .push_back(gen->mass());
+       v_gen_a_pt .push_back(gen->pt());
+       v_gen_a_phi.push_back(gen->phi());
+       v_gen_a_eta.push_back(gen->eta());
+       v_gen_a_id .push_back(1. * type);  
+     }
+     
+     if ( abs(type) == 35 ) {  //---- X
+       v_gen_X_mass .push_back(gen->mass());
+       v_gen_X_pt .push_back(gen->pt());
+       v_gen_X_phi.push_back(gen->phi());
+       v_gen_X_eta.push_back(gen->eta());
+       v_gen_X_id .push_back(1. * type);  
+     }
+     
+  }
+    
    // Save the info
    outTree->Fill();
 

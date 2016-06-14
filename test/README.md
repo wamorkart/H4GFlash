@@ -16,6 +16,12 @@ small test:
     
     H4GTree->Draw("v_pho_chargedHadronIso");
 
+    H4GTree->Draw("v_gen_X_id");
+    H4GTree->Draw("v_gen_X_mass");
+
+    H4GTree->Draw("v_gen_a_mass");
+    
+    
 ## Run all jobs
 
 #### 1) Only once: Create the campaign dataset in flashgg [for background samples that are default for Hgg analysis, skip this step!!]   
@@ -62,3 +68,31 @@ This will submit all the jobs to lxbatch and start a monitoring task. After all 
 ```
 fggRunJobs.py --load outDir/configs.json --cont
 ```
+
+
+
+
+Plot decay chain
+----
+
+    cmsRun TreeDecayDrawer.py   inputFiles=file:/tmp/amassiro/eos/cms/store/user/amassiro/H4G/microAOD/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root 
+    cmsRun TreeDecayDrawer.py   inputFiles=file:/tmp/amassiro/eos/cms/store/user/amassiro/H4G/microAOD/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root \
+                                maxEvents=1
+        
+    -- decay tree: --
+    H0{status: 22} <idx: 0>
+    +-> h0{status: 22} <idx: 1>
+    |   +-> gamma{status: 1} <idx: 3> gamma{status: 1} <idx: 4>
+    +-> h0{status: 22} <idx: 2>
+        +-> gamma{status: 1} <idx: 5> gamma{status: 1} <idx: 6>
+    
+    
+    
+    cmsRun TreeDecayDrawer.py    inputFiles=file:/tmp/amassiro/eos/cms/store/user/amassiro/H4G/GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8/AOD_miniAOD-RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12_tris/160524_103125/0000/HIG-RunIIFall15MiniAODv2-00711_52.root        \
+                                 maxEvents=1
+        
+        
+
+        
+        
+        
