@@ -101,6 +101,8 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<float> v_pho_eta;
       std::vector<float> v_pho_phi;
       std::vector<float> v_pho_e;
+
+      std::vector<LorentzVector> v_genlep_p4;
       
       std::vector<float> v_gen_a_mass;
       std::vector<float> v_gen_a_id;
@@ -220,6 +222,9 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_iPhi",             &v_pho_iPhi );
    outTree->Branch("v_pho_iEta",             &v_pho_iEta );
     
+   
+   outTree->Branch("v_genlep_p4", &v_genlep_p4);
+      
    outTree->Branch("v_gen_a_mass",           &v_gen_a_mass );
    outTree->Branch("v_gen_a_id",             &v_gen_a_id );
    outTree->Branch("v_gen_a_pt",             &v_gen_a_pt );
@@ -347,6 +352,7 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_pho_iPhi.clear(); 
    v_pho_iEta.clear(); 
    
+   v_genlep_p4.clear();
    
    v_gen_a_mass.clear();
    v_gen_a_id.clear();
@@ -577,6 +583,11 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
        v_gen_X_phi.push_back(gen->phi());
        v_gen_X_eta.push_back(gen->eta());
        v_gen_X_id .push_back(1. * type);  
+     }
+     
+     
+     if (( abs(type) == 11 || abs(type) == 13 || abs(type) == 15 ) && (gen->isPromptFinalState() == 1)) {  //---- leptons (only prompt)
+       v_genlep_p4.push_back( gen->p4() );
      }
      
   }

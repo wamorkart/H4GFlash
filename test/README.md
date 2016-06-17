@@ -16,6 +16,9 @@ small test:
     
     H4GTree->Draw("v_pho_chargedHadronIso");
 
+    H4GTree->Draw("@v_genpho_p4.size()");
+
+    
     H4GTree->Draw("v_gen_X_id");
     H4GTree->Draw("v_gen_X_mass");
 
