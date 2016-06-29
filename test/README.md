@@ -3,17 +3,42 @@
 cmsRun MakeTrees.py inputFiles=/store/group/phys_higgs/cmshgg/ferriff/flashgg/RunIIFall15DR76-1_3_0-25ns_ext1/1_3_1/GluGluHToGG_M-125_13TeV_powheg_pythia8/RunIIFall15DR76-1_3_0-25ns_ext1-1_3_1-v0-RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1/160130_032602/0000/myMicroAODOutputFile_1.root PURW=0
 ```
 
-    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root    PURW=0
-    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_10GeV_Pythia8.root    PURW=0
+    cd /afs/cern.ch/user/a/amassiro/work/Hgg/H4G/TestFlashGG/CMSSW_7_6_3_patch2/src/flashgg/H4GFlash/test/
+    
+    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root    PURW=0   outputFile=mX_750GeV_mA_370GeV.root
+    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_10GeV_Pythia8.root     PURW=0   outputFile=mX_750GeV_mA_10GeV.root
 
+    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/FIX_2/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root    PURW=0   outputFile=FIX_2_mX_750GeV_mA_370GeV.root
+    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/FIX_2/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_10GeV_Pythia8.root     PURW=0   outputFile=FIX_2_mX_750GeV_mA_10GeV.root
 
+    
+    cd /afs/cern.ch/user/a/amassiro/work/Hgg/H4G/TestFlashGG/CMSSW_7_6_3_patch2/src/flashgg/H4GFlash/test/
+    cmsenv
+    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/FIX_3/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root     PURW=0   outputFile=FIX_3_mX_750GeV_mA_370GeV.root
+
+    
 small test:
 
     r99t  output.root 
     TTree* H4GTree = (TTree*) _file0->Get("h4gflash/H4GTree");
+
     H4GTree->Draw("v_h4g_tetraphos.p4.M()");
     H4GTree->Draw("v_h4g_tetraphos.p4.M()","@v_h4g_tetraphos.size() == 3");
+    H4GTree->Draw("v_h4g_tetraphos.p4.M()","@v_h4g_tetraphos.size() == 3 && v_h4g_tetraphos.p4.M() > 500 && v_h4g_tetraphos.p4.M() < 1000");
+    H4GTree->Draw("v_h4g_tetraphos[0].p4.M()","@v_h4g_tetraphos.size() == 3 && v_h4g_tetraphos.p4.M() > 500 && v_h4g_tetraphos.p4.M() < 1000");
     
+    H4GTree->Draw("v_h4g_diphos.p4.M()");
+    H4GTree->Draw("v_h4g_diphos[0].p4.M()");
+    H4GTree->Draw("v_h4g_diphos[0].p4.M()", "@v_h4g_tetraphos.size() == 3");
+    
+    H4GTree->Draw("v_h4g_diphos[0].p4.M()", "@v_h4g_tetraphos.size() == 3 && v_h4g_diphos[0].p4.M() > 100 && v_h4g_diphos[0].p4.M() < 500");
+    H4GTree->Draw("v_h4g_diphos[1].p4.M()", "@v_h4g_tetraphos.size() == 3 && v_h4g_diphos[1].p4.M() > 100 && v_h4g_diphos[1].p4.M() < 500");
+     
+    H4GTree->Draw("v_h4g_diphos[v_h4g_tetraphos[0].ip1].p4.M()", "@v_h4g_tetraphos.size() == 3 && v_h4g_diphos[v_h4g_tetraphos[0].ip1].p4.M() > 100 && v_h4g_diphos[v_h4g_tetraphos[0].ip1].p4.M() < 500");
+    H4GTree->Draw("v_h4g_diphos[v_h4g_tetraphos[0].ip2].p4.M()", "@v_h4g_tetraphos.size() == 3 && v_h4g_diphos[v_h4g_tetraphos[0].ip2].p4.M() > 100 && v_h4g_diphos[v_h4g_tetraphos[0].ip2].p4.M() < 500");
+    H4GTree->Draw("v_h4g_diphos[v_h4g_tetraphos[0].ip1].p4.M():v_h4g_diphos[v_h4g_tetraphos[0].ip2].p4.M()", "@v_h4g_tetraphos.size() == 3 && v_h4g_diphos[v_h4g_tetraphos[0].ip1].p4.M() > 100 && v_h4g_diphos[v_h4g_tetraphos[0].ip1].p4.M() < 500", "colz");
+     
+     
     H4GTree->Draw("v_pho_chargedHadronIso");
 
     H4GTree->Draw("@v_genpho_p4.size()");

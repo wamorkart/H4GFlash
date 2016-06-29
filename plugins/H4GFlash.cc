@@ -241,6 +241,7 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_deta", &v_pho_deta);
    outTree->Branch("v_pho_cutid", &v_pho_cutid);
    outTree->Branch("v_pho_mva", &v_pho_mva);
+   
    outTree->Branch("myTriggerResults", &myTriggerResults);
 
    counter = 0;
@@ -292,7 +293,7 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       
     //Trigger
     myTriggerResults.clear();
-    if(myTriggers.size() > 0){
+    if (myTriggers.size() > 0){
         Handle<edm::TriggerResults> trigResults;
         iEvent.getByToken(triggerToken_, trigResults);
         const edm::TriggerNames &names = iEvent.triggerNames(*trigResults);
@@ -300,19 +301,19 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     }
 
     int acceptedTriggers = 0;
-    for(std::map<std::string, int>::iterator it = myTriggerResults.begin(); it != myTriggerResults.end(); it++){
-      if(DEBUG) std::cout << "Trigger name: " << it->first << "\n \t Decision: " << it->second << std::endl;
-      if(it->second) acceptedTriggers++;
+    for (std::map<std::string, int>::iterator it = myTriggerResults.begin(); it != myTriggerResults.end(); it++){
+      if (DEBUG) std::cout << "Trigger name: " << it->first << "\n \t Decision: " << it->second << std::endl;
+      if (it->second) acceptedTriggers++;
       std::map<std::string, int>::iterator finder;
       finder = triggerStats.find(it->first);
-      if( finder != triggerStats.end() )
+      if ( finder != triggerStats.end() )
          triggerStats[it->first] += it->second;
-      if( finder == triggerStats.end() )
+      if ( finder == triggerStats.end() )
 	 triggerStats[it->first] =  it->second;
     }
 
-    if(acceptedTriggers) passTrigger = 1;
-    if(!acceptedTriggers) passTrigger = 0;
+    if (acceptedTriggers) passTrigger = 1;
+    if (!acceptedTriggers) passTrigger = 0;
 
    //Initialize tree variables
    n_pho = 0;
@@ -378,17 +379,23 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      const flashgg::Photon * pho2 = dipho->subLeadingPhoton();
 
      // Kinematics
+     
+     // ---- conside only di-photon candidates with photons pt>15 GeV
      if( pho1->pt() < 15 || pho2->pt() < 15) 
        continue;
+     
+     // ---- conside only di-photon candidates with photon eta in ECAL acceptance     
      if( fabs(pho1->superCluster()->eta()) > 2.5 || fabs(pho2->superCluster()->eta()) > 2.5 )
        continue;
 
+     // ---- create the list of photons, unique list from all the di-photon candidates
      if ( phosTemp.size() == 0 ){
 	phosTemp.push_back(pho1);
 	phosTemp.push_back(pho2);
 	n_pho+=2;
 	continue;
-     } else {
+     }
+     else {
        float minDR1 = 999, minDR2 = 999;
        for ( size_t p = 0; p < phosTemp.size(); p++){
 	 float deltar1 = deltaR(phosTemp[p]->p4(), pho1->p4());
@@ -411,10 +418,11 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
    }
 
-   for ( size_t i = 0; i < phosTemp.size(); ++i)
-   {
+   // ---- now use the list of photons just created to iterate
+   for ( size_t i = 0; i < phosTemp.size(); ++i) {
+     
      const flashgg::Photon * pho = phosTemp[i];
-
+     
      //
      // Save photon kinematics
      //
@@ -430,7 +438,7 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      LorentzVector thisPhoV4( tmpVec );
      v_pho_p4.push_back( thisPhoV4 );
      v_pho_mva.push_back( pho->userFloat("PhotonMVAEstimatorRun2Spring15NonTrig25nsV2p1Values") );
- 
+     
      v_pho_hadronicOverEm.push_back    ( pho->hadronicOverEm() );  
      v_pho_chargedHadronIso.push_back  ( pho->chargedHadronIso() ); 
      v_pho_neutralHadronIso.push_back  ( pho->neutralHadronIso() ); 
@@ -453,88 +461,95 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      v_pho_iPhi.push_back              ( pho->iPhi() ); 
      v_pho_iEta.push_back              ( pho->iEta() ); 
      
-     
    }
 
    // Save delta r between selected photons
    for( size_t p = 0; p < v_pho_p4.size(); p++) {
-      LorentzVector pho = v_pho_p4[p];
-      std::vector<float> vecDR;
-      std::vector<float> vecDPhi;
-      std::vector<float> vecDEta;
-      for ( size_t p2 = 0; p2 < v_pho_p4.size(); p2++) {
-         LorentzVector pho2 = v_pho_p4[p2];
-         float deltar = 0;
-         float deltaphi = 0;
-         float deltaeta = 0;
-         if( p2 == p ) {
-            deltar = -999;
-            deltaphi = -999;
-            deltaeta = -999;
+      
+     LorentzVector pho = v_pho_p4[p];
+     std::vector<float> vecDR;
+     std::vector<float> vecDPhi;
+     std::vector<float> vecDEta;
+     
+     for ( size_t p2 = 0; p2 < v_pho_p4.size(); p2++) {
+       LorentzVector pho2 = v_pho_p4[p2];
+       float deltar = 0;
+       float deltaphi = 0;
+       float deltaeta = 0;
+       if( p2 == p ) {
+         deltar = -999;
+         deltaphi = -999;
+         deltaeta = -999;
+       }
+       if( p2 != p ) {
+         deltar = deltaR(pho, pho2);
+         deltaphi = deltaPhi(pho.phi(), pho2.phi());
+         deltar = fabs(pho.eta() - pho2.eta());
+       }
+       
+       if( p2 > p ){
+         H4GTools::H4G_DiPhoton thisH4GDipho;
+         LorentzVector Sum = pho+pho2;
+         thisH4GDipho.p4 = Sum;
+         thisH4GDipho.ip1 = p;
+         thisH4GDipho.ip2 = p2;
+         thisH4GDipho.SumPt = pho.pt() + pho2.pt();
+         if( pho.pt() < pho2.pt()){   
+           thisH4GDipho.ip1 = p2;
+           thisH4GDipho.ip2 = p;
          }
-         if( p2 != p ) {
-            deltar = deltaR(pho, pho2);
-            deltaphi = deltaPhi(pho.phi(), pho2.phi());
-            deltar = fabs(pho.eta() - pho2.eta());
-	 }
-
-	 if( p2 > p ){
-            H4GTools::H4G_DiPhoton thisH4GDipho;
-	    LorentzVector Sum = pho+pho2;
-            thisH4GDipho.p4 = Sum;
-            thisH4GDipho.ip1 = p;
-            thisH4GDipho.ip2 = p2;
-	    thisH4GDipho.SumPt = pho.pt() + pho2.pt();
-            if( pho.pt() < pho2.pt()){   
-               thisH4GDipho.ip1 = p2;
-               thisH4GDipho.ip2 = p;
-            }
-	    v_h4g_diphos.push_back(thisH4GDipho);
-         }
-         vecDR.push_back(deltar);
-         vecDPhi.push_back(deltaphi);
-         vecDEta.push_back(deltaeta);
-
-      }
-      v_pho_dr.push_back(vecDR);
-      v_pho_dphi.push_back(vecDPhi);
-      v_pho_deta.push_back(vecDEta);
+         // ---- save all possible combinations,
+         // ---- but of course only once, then we require p2 > p
+         v_h4g_diphos.push_back(thisH4GDipho);
+       }
+       
+       vecDR.push_back(deltar);
+       vecDPhi.push_back(deltaphi);
+       vecDEta.push_back(deltaeta);
+       
+     }
+     
+     //---- vector of the distances between the photon and all other photons in the event
+     v_pho_dr.push_back(vecDR);
+     v_pho_dphi.push_back(vecDPhi);
+     v_pho_deta.push_back(vecDEta);
    }
-
-   //Make tetraphotons
-   for( size_t q1 = 0; q1 < v_h4g_diphos.size(); q1++) {
-      H4GTools::H4G_DiPhoton Dipho1 = v_h4g_diphos[q1];
-         for( size_t q2 = q1+1; q2 < v_h4g_diphos.size(); q2++) {
-            H4GTools::H4G_DiPhoton Dipho2 = v_h4g_diphos[q2];
-	    if ( Dipho1.ip1 == Dipho2.ip1
-		 || Dipho1.ip1 == Dipho2.ip2
-		 || Dipho1.ip2 == Dipho2.ip1
-		 || Dipho1.ip2 == Dipho2.ip2 ) continue;
-
-	    H4GTools::H4G_TetraPhoton thisTetra;
-	    thisTetra.p4 = Dipho1.p4 + Dipho2.p4;
-            thisTetra.idp1 = q1;
-            thisTetra.idp2 = q2;
-	    thisTetra.ip1 = Dipho1.ip1;
-	    thisTetra.ip2 = Dipho1.ip2;
-	    thisTetra.ip3 = Dipho2.ip1;
-	    thisTetra.ip4 = Dipho2.ip2;
-	    thisTetra.SumPt = Dipho1.SumPt + Dipho2.SumPt;
-	    if( Dipho1.p4.pt() < Dipho2.p4.pt()) {
-               thisTetra.idp1 = q2;
-               thisTetra.idp2 = q1;
-	       thisTetra.ip1 = Dipho2.ip1;
-	       thisTetra.ip2 = Dipho2.ip2;
-	       thisTetra.ip3 = Dipho1.ip1;
-	       thisTetra.ip4 = Dipho1.ip2;
-	    }
-
-	    v_h4g_tetraphos.push_back(thisTetra);
-         }
-
+   
+   // ---- Make tetraphotons
+   for ( size_t q1 = 0; q1 < v_h4g_diphos.size(); q1++) {
+     H4GTools::H4G_DiPhoton Dipho1 = v_h4g_diphos[q1];
+     for ( size_t q2 = q1+1; q2 < v_h4g_diphos.size(); q2++) {
+       H4GTools::H4G_DiPhoton Dipho2 = v_h4g_diphos[q2];
+       // ---- check that we don't use photons twice
+       if ( Dipho1.ip1 == Dipho2.ip1
+         || Dipho1.ip1 == Dipho2.ip2
+         || Dipho1.ip2 == Dipho2.ip1
+         || Dipho1.ip2 == Dipho2.ip2 ) continue;
+       
+       H4GTools::H4G_TetraPhoton thisTetra;
+       thisTetra.p4 = Dipho1.p4 + Dipho2.p4;
+       thisTetra.idp1 = q1;
+       thisTetra.idp2 = q2;
+       thisTetra.ip1 = Dipho1.ip1;
+       thisTetra.ip2 = Dipho1.ip2;
+       thisTetra.ip3 = Dipho2.ip1;
+       thisTetra.ip4 = Dipho2.ip2;
+       thisTetra.SumPt = Dipho1.SumPt + Dipho2.SumPt;
+       if ( Dipho1.p4.pt() < Dipho2.p4.pt()) {
+         thisTetra.idp1 = q2;
+         thisTetra.idp2 = q1;
+         thisTetra.ip1 = Dipho2.ip1;
+         thisTetra.ip2 = Dipho2.ip2;
+         thisTetra.ip3 = Dipho1.ip1;
+         thisTetra.ip4 = Dipho1.ip2;
+       }
+       
+       v_h4g_tetraphos.push_back(thisTetra);
+     }
+     
    }
-
-   // Save prompt photon gen information
+   
+   // ---- Save prompt photon gen information
    for( size_t g = 0; g < genPhotons->size(); g++) {
       const auto gen = genPhotons->ptrAt(g);
 
