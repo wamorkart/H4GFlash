@@ -142,7 +142,9 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<float> v_pho_subClusDEta3; 
       std::vector<float> v_pho_iPhi; 
       std::vector<float> v_pho_iEta; 
-            
+      std::vector<float> v_pho_r9; 
+      std::vector<float> v_pho_full5x5_r9; 
+      
       
       std::vector<std::vector<float>> v_pho_dr;
       std::vector<std::vector<float>> v_pho_dphi;
@@ -221,7 +223,9 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_subClusDEta3",     &v_pho_subClusDEta3 );
    outTree->Branch("v_pho_iPhi",             &v_pho_iPhi );
    outTree->Branch("v_pho_iEta",             &v_pho_iEta );
-    
+   outTree->Branch("v_pho_r9",               &v_pho_r9 );
+   outTree->Branch("v_pho_full5x5_r9",       &v_pho_full5x5_r9 );
+   
    
    outTree->Branch("v_genlep_p4", &v_genlep_p4);
       
@@ -352,6 +356,8 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_pho_subClusDEta3.clear(); 
    v_pho_iPhi.clear(); 
    v_pho_iEta.clear(); 
+   v_pho_r9.clear();
+   v_pho_full5x5_r9.clear();
    
    v_genlep_p4.clear();
    
@@ -460,6 +466,10 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      v_pho_subClusDEta3.push_back      ( pho->subClusDEta3() ); 
      v_pho_iPhi.push_back              ( pho->iPhi() ); 
      v_pho_iEta.push_back              ( pho->iEta() ); 
+     v_pho_r9.push_back                ( pho->r9() ); 
+     v_pho_full5x5_r9.push_back        ( pho->full5x5_r9() ); 
+     
+     
      
    }
 

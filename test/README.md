@@ -16,6 +16,9 @@ cmsRun MakeTrees.py inputFiles=/store/group/phys_higgs/cmshgg/ferriff/flashgg/Ru
     cmsenv
     cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/FIX_3/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root     PURW=0   outputFile=FIX_3_mX_750GeV_mA_370GeV.root
 
+    cmsRun MakeTrees.py inputFiles=/store/user/amassiro/H4G/microAOD/FIX_3/myMicroAODOutputFile_GluGluToXToAATo4G_mX_750GeV_mA_370GeV_Pythia8.root     PURW=0   outputFile=FIX_3_mX_750GeV_mA_370GeV_TEST.root
+
+    
     
 small test:
 
@@ -40,6 +43,8 @@ small test:
      
      
     H4GTree->Draw("v_pho_chargedHadronIso");
+    H4GTree->Draw("v_pho_r9");
+    H4GTree->Draw("v_pho_full5x5_r9");
 
     H4GTree->Draw("@v_genpho_p4.size()");
 
