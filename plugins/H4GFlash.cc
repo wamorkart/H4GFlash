@@ -127,23 +127,102 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<float> v_pho_photonIso; 
       std::vector<float> v_pho_passElectronVeto; 
       std::vector<float> v_pho_hasPixelSeed; 
-      std::vector<float> v_pho_ecalPFClusterIso; 
-      std::vector<float> v_pho_hcalPFClusterIso; 
+//       std::vector<float> v_pho_ecalPFClusterIso; 
+//       std::vector<float> v_pho_hcalPFClusterIso; 
       std::vector<float> v_pho_eMax; 
       std::vector<float> v_pho_e3x3; 
-      std::vector<float> v_pho_subClusRawE1; 
-      std::vector<float> v_pho_subClusDPhi1; 
-      std::vector<float> v_pho_subClusDEta1; 
-      std::vector<float> v_pho_subClusRawE2; 
-      std::vector<float> v_pho_subClusDPhi2; 
-      std::vector<float> v_pho_subClusDEta2; 
-      std::vector<float> v_pho_subClusRawE3; 
-      std::vector<float> v_pho_subClusDPhi3; 
-      std::vector<float> v_pho_subClusDEta3; 
+//       std::vector<float> v_pho_subClusRawE1; 
+//       std::vector<float> v_pho_subClusDPhi1; 
+//       std::vector<float> v_pho_subClusDEta1; 
+//       std::vector<float> v_pho_subClusRawE2; 
+//       std::vector<float> v_pho_subClusDPhi2; 
+//       std::vector<float> v_pho_subClusDEta2; 
+//       std::vector<float> v_pho_subClusRawE3; 
+//       std::vector<float> v_pho_subClusDPhi3; 
+//       std::vector<float> v_pho_subClusDEta3; 
       std::vector<float> v_pho_iPhi; 
       std::vector<float> v_pho_iEta; 
       std::vector<float> v_pho_r9; 
       std::vector<float> v_pho_full5x5_r9; 
+
+      std::vector<float> v_pho_sigmaIetaIeta; 
+      std::vector<float> v_pho_sigmaIphiIphi; 
+      std::vector<float> v_pho_dr03HcalTowerSumEt; 
+      std::vector<float> v_pho_dr03EcalRecHitSumEt; 
+      std::vector<float> v_pho_dr03TkSumPt; 
+      
+      //---- from http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/interface/Photon.h
+
+      
+      std::vector<float> v_pho_e2nd                 ;
+      std::vector<float> v_pho_eTop                 ;
+      std::vector<float> v_pho_eBottom              ;
+      std::vector<float> v_pho_eLeft                ;
+      std::vector<float> v_pho_eRight               ;
+      std::vector<float> v_pho_see                  ;
+      std::vector<float> v_pho_spp                  ;
+      std::vector<float> v_pho_sep                  ;
+      std::vector<float> v_pho_maxDR                ;
+      std::vector<float> v_pho_maxDRDPhi            ;
+      std::vector<float> v_pho_maxDRDEta            ;
+      std::vector<float> v_pho_maxDRRawEnergy       ;
+      std::vector<float> v_pho_subClusRawE1         ;
+      std::vector<float> v_pho_subClusRawE2         ;
+      std::vector<float> v_pho_subClusRawE3         ;
+      std::vector<float> v_pho_subClusDPhi1         ;
+      std::vector<float> v_pho_subClusDPhi2         ;
+      std::vector<float> v_pho_subClusDPhi3         ;
+      std::vector<float> v_pho_subClusDEta1         ;
+      std::vector<float> v_pho_subClusDEta2         ;
+      std::vector<float> v_pho_subClusDEta3         ;
+      std::vector<float> v_pho_cryPhi               ;
+      std::vector<float> v_pho_cryEta               ;
+      std::vector<float> v_pho_ecalPFClusterIso     ;
+      std::vector<float> v_pho_hcalPFClusterIso     ;
+      std::vector<float> v_pho_caloIso              ;
+      std::vector<float> v_pho_hcalIso              ;
+      std::vector<float> v_pho_ecalIso              ;
+      std::vector<float> v_pho_trackIso             ;
+      
+      
+      
+      //---- from http://cmslxr.fnal.gov/lxr/source/RecoEgamma/EgammaTools/interface/EcalRegressionData.h
+//       std::vector<float> v_pho_scRawEnergy          ;
+//       std::vector<float> v_pho_scCalibEnergy        ;
+//       std::vector<float> v_pho_scPreShowerEnergy    ;
+//       std::vector<float> v_pho_scEta                ;
+//       std::vector<float> v_pho_scPhi                ;
+//       std::vector<float> v_pho_scEtaWidth           ;
+//       std::vector<float> v_pho_scPhiWidth           ;
+//       std::vector<float> v_pho_seedClusEnergy       ;
+// 
+//       std::vector<float> v_pho_sigmaIEtaIEta        ;
+//       std::vector<float> v_pho_sigmaIEtaIPhi        ;
+//       std::vector<float> v_pho_sigmaIPhiIPhi        ;
+//       
+//       std::vector<float> v_pho_scPreShowerEnergyOverSCRawEnergy     ;
+//       std::vector<float> v_pho_scSeedR9                             ;
+//       std::vector<float> v_pho_seedClusEnergyOverSCRawEnergy        ;
+//       std::vector<float> v_pho_eMaxOverSCRawEnergy                  ;
+//       std::vector<float> v_pho_e2ndOverSCRawEnergy                  ;
+//       std::vector<float> v_pho_seedLeftRightAsym                    ;
+//       std::vector<float> v_pho_seedTopBottomAsym                    ;
+//       std::vector<float> v_pho_maxSubClusDRRawEnergyOverSCRawEnergy ;
+//       
+//       std::vector<float> v_pho_subClusRawEnergyOverSCRawEnergy_0   ;
+//       std::vector<float> v_pho_subClusRawEnergy_0                  ;
+//       std::vector<float> v_pho_subClusDPhi_0                       ;
+//       std::vector<float> v_pho_subClusDEta_0                       ;
+//       
+//       std::vector<float> v_pho_subClusRawEnergyOverSCRawEnergy_1   ;
+//       std::vector<float> v_pho_subClusRawEnergy_1                  ;
+//       std::vector<float> v_pho_subClusDPhi_1                       ;
+//       std::vector<float> v_pho_subClusDEta_1                       ;
+//       
+//       std::vector<float> v_pho_subClusRawEnergyOverSCRawEnergy_2   ;
+//       std::vector<float> v_pho_subClusRawEnergy_2                  ;
+//       std::vector<float> v_pho_subClusDPhi_2                       ;
+//       std::vector<float> v_pho_subClusDEta_2                       ;
       
       
       std::vector<std::vector<float>> v_pho_dr;
@@ -208,24 +287,104 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_photonIso",        &v_pho_photonIso );
    outTree->Branch("v_pho_passElectronVeto", &v_pho_passElectronVeto);
    outTree->Branch("v_pho_hasPixelSeed",     &v_pho_hasPixelSeed );
-   outTree->Branch("v_pho_ecalPFClusterIso", &v_pho_ecalPFClusterIso);
-   outTree->Branch("v_pho_hcalPFClusterIso", &v_pho_hcalPFClusterIso);
+//    outTree->Branch("v_pho_ecalPFClusterIso", &v_pho_ecalPFClusterIso);
+//    outTree->Branch("v_pho_hcalPFClusterIso", &v_pho_hcalPFClusterIso);
    outTree->Branch("v_pho_eMax",             &v_pho_eMax );
    outTree->Branch("v_pho_e3x3",             &v_pho_e3x3 );
-   outTree->Branch("v_pho_subClusRawE1",     &v_pho_subClusRawE1 );
-   outTree->Branch("v_pho_subClusDPhi1",     &v_pho_subClusDPhi1 );
-   outTree->Branch("v_pho_subClusDEta1",     &v_pho_subClusDEta1 );
-   outTree->Branch("v_pho_subClusRawE2",     &v_pho_subClusRawE2 );
-   outTree->Branch("v_pho_subClusDPhi2",     &v_pho_subClusDPhi2 );
-   outTree->Branch("v_pho_subClusDEta2",     &v_pho_subClusDEta2 );
-   outTree->Branch("v_pho_subClusRawE3",     &v_pho_subClusRawE3 );
-   outTree->Branch("v_pho_subClusDPhi3",     &v_pho_subClusDPhi3 );
-   outTree->Branch("v_pho_subClusDEta3",     &v_pho_subClusDEta3 );
+//    outTree->Branch("v_pho_subClusRawE1",     &v_pho_subClusRawE1 );
+//    outTree->Branch("v_pho_subClusDPhi1",     &v_pho_subClusDPhi1 );
+//    outTree->Branch("v_pho_subClusDEta1",     &v_pho_subClusDEta1 );
+//    outTree->Branch("v_pho_subClusRawE2",     &v_pho_subClusRawE2 );
+//    outTree->Branch("v_pho_subClusDPhi2",     &v_pho_subClusDPhi2 );
+//    outTree->Branch("v_pho_subClusDEta2",     &v_pho_subClusDEta2 );
+//    outTree->Branch("v_pho_subClusRawE3",     &v_pho_subClusRawE3 );
+//    outTree->Branch("v_pho_subClusDPhi3",     &v_pho_subClusDPhi3 );
+//    outTree->Branch("v_pho_subClusDEta3",     &v_pho_subClusDEta3 );
    outTree->Branch("v_pho_iPhi",             &v_pho_iPhi );
    outTree->Branch("v_pho_iEta",             &v_pho_iEta );
    outTree->Branch("v_pho_r9",               &v_pho_r9 );
    outTree->Branch("v_pho_full5x5_r9",       &v_pho_full5x5_r9 );
    
+   //---- more photon id variables
+   
+   outTree->Branch("v_pho_sigmaIetaIeta"        ,     &v_pho_sigmaIetaIeta );        
+   outTree->Branch("v_pho_sigmaIphiIphi"        ,     &v_pho_sigmaIphiIphi );        
+   outTree->Branch("v_pho_dr03HcalTowerSumEt"   ,     &v_pho_dr03HcalTowerSumEt );   
+   outTree->Branch("v_pho_dr03EcalRecHitSumEt"  ,     &v_pho_dr03EcalRecHitSumEt );  
+   outTree->Branch("v_pho_dr03TkSumPt"          ,     &v_pho_dr03TkSumPt );          
+   
+   //---- from http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/interface/Photon.h  
+   outTree->Branch("v_pho_e2nd"                 ,     &v_pho_e2nd );                 
+   outTree->Branch("v_pho_eTop"                 ,     &v_pho_eTop );                 
+   outTree->Branch("v_pho_eBottom"              ,     &v_pho_eBottom );              
+   outTree->Branch("v_pho_eLeft"                ,     &v_pho_eLeft );                
+   outTree->Branch("v_pho_eRight"               ,     &v_pho_eRight );               
+   outTree->Branch("v_pho_see"                  ,     &v_pho_see );                  
+   outTree->Branch("v_pho_spp"                  ,     &v_pho_spp );                  
+   outTree->Branch("v_pho_sep"                  ,     &v_pho_sep );                  
+   outTree->Branch("v_pho_maxDR"                ,     &v_pho_maxDR );                
+   outTree->Branch("v_pho_maxDRDPhi"            ,     &v_pho_maxDRDPhi );            
+   outTree->Branch("v_pho_maxDRDEta"            ,     &v_pho_maxDRDEta );            
+   outTree->Branch("v_pho_maxDRRawEnergy"       ,     &v_pho_maxDRRawEnergy );       
+   outTree->Branch("v_pho_subClusRawE1"         ,     &v_pho_subClusRawE1 );         
+   outTree->Branch("v_pho_subClusRawE2"         ,     &v_pho_subClusRawE2 );         
+   outTree->Branch("v_pho_subClusRawE3"         ,     &v_pho_subClusRawE3 );         
+   outTree->Branch("v_pho_subClusDPhi1"         ,     &v_pho_subClusDPhi1 );         
+   outTree->Branch("v_pho_subClusDPhi2"         ,     &v_pho_subClusDPhi2 );         
+   outTree->Branch("v_pho_subClusDPhi3"         ,     &v_pho_subClusDPhi3 );         
+   outTree->Branch("v_pho_subClusDEta1"         ,     &v_pho_subClusDEta1 );         
+   outTree->Branch("v_pho_subClusDEta2"         ,     &v_pho_subClusDEta2 );         
+   outTree->Branch("v_pho_subClusDEta3"         ,     &v_pho_subClusDEta3 );         
+   outTree->Branch("v_pho_cryPhi"               ,     &v_pho_cryPhi );               
+   outTree->Branch("v_pho_cryEta"               ,     &v_pho_cryEta );               
+   outTree->Branch("v_pho_ecalPFClusterIso"     ,     &v_pho_ecalPFClusterIso );     
+   outTree->Branch("v_pho_hcalPFClusterIso"     ,     &v_pho_hcalPFClusterIso );     
+   outTree->Branch("v_pho_caloIso"              ,     &v_pho_caloIso );              
+   outTree->Branch("v_pho_hcalIso"              ,     &v_pho_hcalIso );              
+   outTree->Branch("v_pho_ecalIso"              ,     &v_pho_ecalIso );              
+   outTree->Branch("v_pho_trackIso"             ,     &v_pho_trackIso );             
+   
+   
+   
+   //---- from http://cmslxr.fnal.gov/lxr/source/RecoEgamma/EgammaTools/interface/EcalRegressionData.h
+//    outTree->Branch("v_pho_scRawEnergy"                              ,          &v_pho_scRawEnergy );                            
+//    outTree->Branch("v_pho_scCalibEnergy"                            ,          &v_pho_scCalibEnergy );                          
+//    outTree->Branch("v_pho_scPreShowerEnergy"                        ,          &v_pho_scPreShowerEnergy );                      
+//    outTree->Branch("v_pho_scEta"                                    ,          &v_pho_scEta );                                  
+//    outTree->Branch("v_pho_scPhi"                                    ,          &v_pho_scPhi );                                  
+//    outTree->Branch("v_pho_scEtaWidth"                               ,          &v_pho_scEtaWidth );                             
+//    outTree->Branch("v_pho_scPhiWidth"                               ,          &v_pho_scPhiWidth );                             
+//    outTree->Branch("v_pho_seedClusEnergy"                           ,          &v_pho_seedClusEnergy );                         
+//    outTree->Branch("v_pho_sigmaIEtaIEta"                            ,          &v_pho_sigmaIEtaIEta );                          
+//    outTree->Branch("v_pho_sigmaIEtaIPhi"                            ,          &v_pho_sigmaIEtaIPhi );                          
+//    outTree->Branch("v_pho_sigmaIPhiIPhi"                            ,          &v_pho_sigmaIPhiIPhi );                          
+//    outTree->Branch("v_pho_scPreShowerEnergyOverSCRawEnergy"         ,          &v_pho_scPreShowerEnergyOverSCRawEnergy );       
+//    outTree->Branch("v_pho_scSeedR9"                                 ,          &v_pho_scSeedR9 );                               
+//    outTree->Branch("v_pho_seedClusEnergyOverSCRawEnergy"            ,          &v_pho_seedClusEnergyOverSCRawEnergy );          
+//    outTree->Branch("v_pho_eMaxOverSCRawEnergy"                      ,          &v_pho_eMaxOverSCRawEnergy );                    
+//    outTree->Branch("v_pho_e2ndOverSCRawEnergy"                      ,          &v_pho_e2ndOverSCRawEnergy );                    
+//    outTree->Branch("v_pho_seedLeftRightAsym"                        ,          &v_pho_seedLeftRightAsym );                      
+//    outTree->Branch("v_pho_seedTopBottomAsym"                        ,          &v_pho_seedTopBottomAsym );                      
+//    outTree->Branch("v_pho_maxSubClusDRRawEnergyOverSCRawEnergy"     ,          &v_pho_maxSubClusDRRawEnergyOverSCRawEnergy );   
+//    
+//    outTree->Branch("v_pho_subClusRawEnergyOverSCRawEnergy_0"        ,          &v_pho_subClusRawEnergyOverSCRawEnergy_0 );      
+//    outTree->Branch("v_pho_subClusRawEnergy_0"                       ,          &v_pho_subClusRawEnergy_0 );                     
+//    outTree->Branch("v_pho_subClusDPhi_0"                            ,          &v_pho_subClusDPhi_0 );                          
+//    outTree->Branch("v_pho_subClusDEta_0"                            ,          &v_pho_subClusDEta_0 );                          
+//      
+//    outTree->Branch("v_pho_subClusRawEnergyOverSCRawEnergy_1"        ,          &v_pho_subClusRawEnergyOverSCRawEnergy_1 );      
+//    outTree->Branch("v_pho_subClusRawEnergy_1"                       ,          &v_pho_subClusRawEnergy_1 );                     
+//    outTree->Branch("v_pho_subClusDPhi_1"                            ,          &v_pho_subClusDPhi_1 );                          
+//    outTree->Branch("v_pho_subClusDEta_1"                            ,          &v_pho_subClusDEta_1 );                          
+//    
+//    outTree->Branch("v_pho_subClusRawEnergyOverSCRawEnergy_2"        ,          &v_pho_subClusRawEnergyOverSCRawEnergy_2 );      
+//    outTree->Branch("v_pho_subClusRawEnergy_2"                       ,          &v_pho_subClusRawEnergy_2 );                     
+//    outTree->Branch("v_pho_subClusDPhi_2"                            ,          &v_pho_subClusDPhi_2 );                          
+//    outTree->Branch("v_pho_subClusDEta_2"                            ,          &v_pho_subClusDEta_2 );                          
+//    
+   
+   
+   //---- gen level variables
    
    outTree->Branch("v_genlep_p4", &v_genlep_p4);
       
@@ -341,23 +500,99 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_pho_photonIso.clear(); 
    v_pho_passElectronVeto.clear(); 
    v_pho_hasPixelSeed.clear(); 
-   v_pho_ecalPFClusterIso.clear(); 
-   v_pho_hcalPFClusterIso.clear(); 
+//    v_pho_ecalPFClusterIso.clear(); 
+//    v_pho_hcalPFClusterIso.clear(); 
    v_pho_eMax.clear(); 
    v_pho_e3x3.clear(); 
-   v_pho_subClusRawE1.clear(); 
-   v_pho_subClusDPhi1.clear(); 
-   v_pho_subClusDEta1.clear(); 
-   v_pho_subClusRawE2.clear(); 
-   v_pho_subClusDPhi2.clear(); 
-   v_pho_subClusDEta2.clear(); 
-   v_pho_subClusRawE3.clear(); 
-   v_pho_subClusDPhi3.clear(); 
-   v_pho_subClusDEta3.clear(); 
+//    v_pho_subClusRawE1.clear(); 
+//    v_pho_subClusDPhi1.clear(); 
+//    v_pho_subClusDEta1.clear(); 
+//    v_pho_subClusRawE2.clear(); 
+//    v_pho_subClusDPhi2.clear(); 
+//    v_pho_subClusDEta2.clear(); 
+//    v_pho_subClusRawE3.clear(); 
+//    v_pho_subClusDPhi3.clear(); 
+//    v_pho_subClusDEta3.clear(); 
    v_pho_iPhi.clear(); 
    v_pho_iEta.clear(); 
    v_pho_r9.clear();
    v_pho_full5x5_r9.clear();
+   
+   
+   v_pho_sigmaIetaIeta.clear(); 
+   v_pho_sigmaIphiIphi.clear(); 
+   v_pho_dr03HcalTowerSumEt.clear(); 
+   v_pho_dr03EcalRecHitSumEt.clear(); 
+   v_pho_dr03TkSumPt.clear(); 
+   
+   v_pho_e2nd                 .clear();
+   v_pho_eTop                 .clear();
+   v_pho_eBottom              .clear();
+   v_pho_eLeft                .clear();
+   v_pho_eRight               .clear();
+   v_pho_see                  .clear();
+   v_pho_spp                  .clear();
+   v_pho_sep                  .clear();
+   v_pho_maxDR                .clear();
+   v_pho_maxDRDPhi            .clear();
+   v_pho_maxDRDEta            .clear();
+   v_pho_maxDRRawEnergy       .clear();
+   v_pho_subClusRawE1         .clear();
+   v_pho_subClusRawE2         .clear();
+   v_pho_subClusRawE3         .clear();
+   v_pho_subClusDPhi1         .clear();
+   v_pho_subClusDPhi2         .clear();
+   v_pho_subClusDPhi3         .clear();
+   v_pho_subClusDEta1         .clear();
+   v_pho_subClusDEta2         .clear();
+   v_pho_subClusDEta3         .clear();
+   v_pho_cryPhi               .clear();
+   v_pho_cryEta               .clear();
+   v_pho_ecalPFClusterIso     .clear();
+   v_pho_hcalPFClusterIso     .clear();
+   v_pho_caloIso              .clear();
+   v_pho_hcalIso              .clear();
+   v_pho_ecalIso              .clear();
+   v_pho_trackIso             .clear();
+   
+//    v_pho_scRawEnergy          .clear();
+//    v_pho_scCalibEnergy        .clear();
+//    v_pho_scPreShowerEnergy    .clear();
+//    v_pho_scEta                .clear();
+//    v_pho_scPhi                .clear();
+//    v_pho_scEtaWidth           .clear();
+//    v_pho_scPhiWidth           .clear();
+//    v_pho_seedClusEnergy       .clear();
+//    
+//    v_pho_sigmaIEtaIEta        .clear();
+//    v_pho_sigmaIEtaIPhi        .clear();
+//    v_pho_sigmaIPhiIPhi        .clear();
+//    
+//    v_pho_scPreShowerEnergyOverSCRawEnergy     .clear();
+//    v_pho_scSeedR9                             .clear();
+//    v_pho_seedClusEnergyOverSCRawEnergy        .clear();
+//    v_pho_eMaxOverSCRawEnergy                  .clear();
+//    v_pho_e2ndOverSCRawEnergy                  .clear();
+//    v_pho_seedLeftRightAsym                    .clear();
+//    v_pho_seedTopBottomAsym                    .clear();
+//    v_pho_maxSubClusDRRawEnergyOverSCRawEnergy .clear();
+//    
+//    v_pho_subClusRawEnergyOverSCRawEnergy_0   .clear();
+//    v_pho_subClusRawEnergy_0                  .clear();
+//    v_pho_subClusDPhi_0                       .clear();
+//    v_pho_subClusDEta_0                       .clear();
+//    
+//    v_pho_subClusRawEnergyOverSCRawEnergy_1   .clear();
+//    v_pho_subClusRawEnergy_1                  .clear();
+//    v_pho_subClusDPhi_1                       .clear();
+//    v_pho_subClusDEta_1                       .clear();
+//    
+//    v_pho_subClusRawEnergyOverSCRawEnergy_2   .clear();
+//    v_pho_subClusRawEnergy_2                  .clear();
+//    v_pho_subClusDPhi_2                       .clear();
+//    v_pho_subClusDEta_2                       .clear();
+   
+   
    
    v_genlep_p4.clear();
    
@@ -451,25 +686,100 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      v_pho_photonIso.push_back         ( pho->photonIso() ); 
      v_pho_passElectronVeto.push_back  ( pho->passElectronVeto() ); 
      v_pho_hasPixelSeed.push_back      ( pho->hasPixelSeed() ); 
-     v_pho_ecalPFClusterIso.push_back  ( pho->ecalPFClusterIso() ); 
-     v_pho_hcalPFClusterIso.push_back  ( pho->hcalPFClusterIso() ); 
+//      v_pho_ecalPFClusterIso.push_back  ( pho->ecalPFClusterIso() ); 
+//      v_pho_hcalPFClusterIso.push_back  ( pho->hcalPFClusterIso() ); 
      v_pho_eMax.push_back              ( pho->eMax() ); 
      v_pho_e3x3.push_back              ( pho->e3x3() ); 
-     v_pho_subClusRawE1.push_back      ( pho->subClusRawE1() ); 
-     v_pho_subClusDPhi1.push_back      ( pho->subClusDPhi1() ); 
-     v_pho_subClusDEta1.push_back      ( pho->subClusDEta1() ); 
-     v_pho_subClusRawE2.push_back      ( pho->subClusRawE2() ); 
-     v_pho_subClusDPhi2.push_back      ( pho->subClusDPhi2() ); 
-     v_pho_subClusDEta2.push_back      ( pho->subClusDEta2() ); 
-     v_pho_subClusRawE3.push_back      ( pho->subClusRawE3() ); 
-     v_pho_subClusDPhi3.push_back      ( pho->subClusDPhi3() ); 
-     v_pho_subClusDEta3.push_back      ( pho->subClusDEta3() ); 
+//      v_pho_subClusRawE1.push_back      ( pho->subClusRawE1() ); 
+//      v_pho_subClusDPhi1.push_back      ( pho->subClusDPhi1() ); 
+//      v_pho_subClusDEta1.push_back      ( pho->subClusDEta1() ); 
+//      v_pho_subClusRawE2.push_back      ( pho->subClusRawE2() ); 
+//      v_pho_subClusDPhi2.push_back      ( pho->subClusDPhi2() ); 
+//      v_pho_subClusDEta2.push_back      ( pho->subClusDEta2() ); 
+//      v_pho_subClusRawE3.push_back      ( pho->subClusRawE3() ); 
+//      v_pho_subClusDPhi3.push_back      ( pho->subClusDPhi3() ); 
+//      v_pho_subClusDEta3.push_back      ( pho->subClusDEta3() ); 
      v_pho_iPhi.push_back              ( pho->iPhi() ); 
      v_pho_iEta.push_back              ( pho->iEta() ); 
      v_pho_r9.push_back                ( pho->r9() ); 
      v_pho_full5x5_r9.push_back        ( pho->full5x5_r9() ); 
      
      
+     
+     
+     v_pho_sigmaIetaIeta        .push_back(  pho-> sigmaIetaIeta       ()  );
+     v_pho_sigmaIphiIphi        .push_back(  pho->  showerShapeVariables() . sigmaIphiIphi       );
+//      v_pho_dr03HcalTowerSumEt   .push_back(  pho-> dr03HcalTowerSumEt  ()  );
+//      v_pho_dr03EcalRecHitSumEt  .push_back(  pho-> dr03EcalRecHitSumEt ()  );
+//      v_pho_dr03TkSumPt          .push_back(  pho-> dr03TkSumPt         ()  );
+     
+     v_pho_e2nd                 .push_back(  pho-> e2nd                ()  );
+     v_pho_eTop                 .push_back(  pho-> eTop                ()  );
+     v_pho_eBottom              .push_back(  pho-> eBottom             ()  );
+     v_pho_eLeft                .push_back(  pho-> eLeft               ()  );
+     v_pho_eRight               .push_back(  pho-> eRight              ()  );
+     v_pho_see                  .push_back(  pho-> see                 ()  );
+     v_pho_spp                  .push_back(  pho-> spp                 ()  );
+     v_pho_sep                  .push_back(  pho-> sep                 ()  );
+     v_pho_maxDR                .push_back(  pho-> maxDR               ()  );
+     v_pho_maxDRDPhi            .push_back(  pho-> maxDRDPhi           ()  );
+     v_pho_maxDRDEta            .push_back(  pho-> maxDRDEta           ()  );
+     v_pho_maxDRRawEnergy       .push_back(  pho-> maxDRRawEnergy      ()  );
+     v_pho_subClusRawE1         .push_back(  pho-> subClusRawE1        ()  );
+     v_pho_subClusRawE2         .push_back(  pho-> subClusRawE2        ()  );
+     v_pho_subClusRawE3         .push_back(  pho-> subClusRawE3        ()  );
+     v_pho_subClusDPhi1         .push_back(  pho-> subClusDPhi1        ()  );
+     v_pho_subClusDPhi2         .push_back(  pho-> subClusDPhi2        ()  );
+     v_pho_subClusDPhi3         .push_back(  pho-> subClusDPhi3        ()  );
+     v_pho_subClusDEta1         .push_back(  pho-> subClusDEta1        ()  );
+     v_pho_subClusDEta2         .push_back(  pho-> subClusDEta2        ()  );
+     v_pho_subClusDEta3         .push_back(  pho-> subClusDEta3        ()  );
+     v_pho_cryPhi               .push_back(  pho-> cryPhi              ()  );
+     v_pho_cryEta               .push_back(  pho-> cryEta              ()  );
+     v_pho_ecalPFClusterIso     .push_back(  pho-> ecalPFClusterIso    ()  );
+     v_pho_hcalPFClusterIso     .push_back(  pho-> hcalPFClusterIso    ()  );
+     v_pho_caloIso              .push_back(  pho-> caloIso             ()  );
+     v_pho_hcalIso              .push_back(  pho-> hcalIso             ()  );
+     v_pho_ecalIso              .push_back(  pho-> ecalIso             ()  );
+     v_pho_trackIso             .push_back(  pho-> trackIso            ()  );
+                                                            
+//      v_pho_scRawEnergy          .push_back(  pho-> scRawEnergy         ()  );
+//      v_pho_scCalibEnergy        .push_back(  pho-> scCalibEnergy       ()  );
+//      v_pho_scPreShowerEnergy    .push_back(  pho-> scPreShowerEnergy   ()  );
+//      v_pho_scEta                .push_back(  pho-> scEta               ()  );
+//      v_pho_scPhi                .push_back(  pho-> scPhi               ()  );
+//      v_pho_scEtaWidth           .push_back(  pho-> scEtaWidth          ()  );
+//      v_pho_scPhiWidth           .push_back(  pho-> scPhiWidth          ()  );
+//      v_pho_seedClusEnergy       .push_back(  pho-> seedClusEnergy      ()  );
+//                                                             
+//      v_pho_sigmaIEtaIEta        .push_back(  pho-> sigmaIEtaIEta       ()  );
+//      v_pho_sigmaIEtaIPhi        .push_back(  pho-> sigmaIEtaIPhi       ()  );
+//      v_pho_sigmaIPhiIPhi        .push_back(  pho-> sigmaIPhiIPhi       ()  );
+//      
+//      v_pho_scPreShowerEnergyOverSCRawEnergy     .push_back(  pho-> scPreShowerEnergyOverSCRawEnergy            ()  );
+//      v_pho_scSeedR9                             .push_back(  pho-> scSeedR9                                    ()  );
+//      v_pho_seedClusEnergyOverSCRawEnergy        .push_back(  pho-> seedClusEnergyOverSCRawEnergy               ()  );
+//      v_pho_eMaxOverSCRawEnergy                  .push_back(  pho-> eMaxOverSCRawEnergy                         ()  );
+//      v_pho_e2ndOverSCRawEnergy                  .push_back(  pho-> e2ndOverSCRawEnergy                         ()  );
+//      v_pho_seedLeftRightAsym                    .push_back(  pho-> seedLeftRightAsym                           ()  );
+//      v_pho_seedTopBottomAsym                    .push_back(  pho-> seedTopBottomAsym                           ()  );
+//      v_pho_maxSubClusDRRawEnergyOverSCRawEnergy .push_back(  pho-> maxSubClusDRRawEnergyOverSCRawEnergy        ()  );
+//                                                                                                    
+//      v_pho_subClusRawEnergyOverSCRawEnergy_0   .push_back(  pho->  subClusRawEnergyOverSCRawEnergy           (0)  );
+//      v_pho_subClusRawEnergy_0                  .push_back(  pho->  subClusRawEnergy                          (0)  );
+//      v_pho_subClusDPhi_0                       .push_back(  pho->  subClusDPhi                               (0)  );
+//      v_pho_subClusDEta_0                       .push_back(  pho->  subClusDEta                               (0)  );
+//                                                                                                      
+//      v_pho_subClusRawEnergyOverSCRawEnergy_1   .push_back(  pho->  subClusRawEnergyOverSCRawEnergy           (1)  );
+//      v_pho_subClusRawEnergy_1                  .push_back(  pho->  subClusRawEnergy                          (1)  );
+//      v_pho_subClusDPhi_1                       .push_back(  pho->  subClusDPhi                               (1)  );
+//      v_pho_subClusDEta_1                       .push_back(  pho->  subClusDEta                               (1)  );
+//                                                                                                   
+//      v_pho_subClusRawEnergyOverSCRawEnergy_2   .push_back(  pho->  subClusRawEnergyOverSCRawEnergy           (2)  );
+//      v_pho_subClusRawEnergy_2                  .push_back(  pho->  subClusRawEnergy                          (2)  );
+//      v_pho_subClusDPhi_2                       .push_back(  pho->  subClusDPhi                               (2)  );
+//      v_pho_subClusDEta_2                       .push_back(  pho->  subClusDEta                               (2)  );
+                                                                                                 
      
    }
 
