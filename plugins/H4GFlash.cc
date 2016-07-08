@@ -122,9 +122,9 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       //     http://cmslxr.fnal.gov/lxr/source/DataFormats/PatCandidates/src/Photon.cc
       // photon ids and cluster variables
       std::vector<float> v_pho_hadronicOverEm;  
-      std::vector<float> v_pho_chargedHadronIso; 
-      std::vector<float> v_pho_neutralHadronIso; 
-      std::vector<float> v_pho_photonIso; 
+//       std::vector<float> v_pho_chargedHadronIso; 
+//       std::vector<float> v_pho_neutralHadronIso; 
+//       std::vector<float> v_pho_photonIso; 
       std::vector<float> v_pho_passElectronVeto; 
       std::vector<float> v_pho_hasPixelSeed; 
 //       std::vector<float> v_pho_ecalPFClusterIso; 
@@ -224,6 +224,90 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
 //       std::vector<float> v_pho_subClusDPhi_2                       ;
 //       std::vector<float> v_pho_subClusDEta_2                       ;
       
+      //---- from https://cmssdt.cern.ch/SDT/doxygen/CMSSW_8_0_11/doc/html/df/d55/EgammaCandidates_2interface_2Photon_8h_source.html
+      
+      std::vector<float>  v_pho_e1x5   ;           
+      std::vector<float>  v_pho_e2x5   ;           
+//       std::vector<float>  e3x3   ;           
+      std::vector<float>  v_pho_e5x5   ;           
+      std::vector<float>  v_pho_maxEnergyXtal   ;  
+      std::vector<float>  v_pho_sigmaEtaEta   ;    
+//       std::vector<float>  sigmaIetaIeta   ;  
+      std::vector<float>  v_pho_r1x5    ;          
+      std::vector<float>  v_pho_r2x5    ;          
+//       std::vector<float>  r9    ;         
+      
+      std::vector<float>  v_pho_full5x5_e1x5   ;           
+      std::vector<float>  v_pho_full5x5_e2x5   ;           
+      std::vector<float>  v_pho_full5x5_e3x3   ;           
+      std::vector<float>  v_pho_full5x5_e5x5   ;           
+      std::vector<float>  v_pho_full5x5_maxEnergyXtal   ;  
+      std::vector<float>  v_pho_full5x5_sigmaEtaEta   ;    
+      std::vector<float>  v_pho_full5x5_sigmaIetaIeta   ;  
+      std::vector<float>  v_pho_full5x5_r1x5    ;          
+      std::vector<float>  v_pho_full5x5_r2x5    ;          
+//       std::vector<float>  full5x5_r9    ;         
+      
+      
+      std::vector<float>  v_pho_mipChi2   ;       
+      std::vector<float>  v_pho_mipTotEnergy   ;  
+      std::vector<float>  v_pho_mipSlope   ;      
+      std::vector<float>  v_pho_mipIntercept   ;  
+      std::vector<int>    v_pho_mipNhitCone   ;     
+      std::vector<int>    v_pho_mipIsHalo   ;     
+      
+      
+      std::vector<float>  v_pho_ecalRecHitSumEtConeDR04   ;     
+      std::vector<float>  v_pho_hcalTowerSumEtConeDR04   ;      
+      std::vector<float>  v_pho_hcalDepth1TowerSumEtConeDR04   ;
+      std::vector<float>  v_pho_hcalDepth2TowerSumEtConeDR04   ;
+      std::vector<float>  v_pho_hcalTowerSumEtBcConeDR04   ;      
+      std::vector<float>  v_pho_hcalDepth1TowerSumEtBcConeDR04   ;
+      std::vector<float>  v_pho_hcalDepth2TowerSumEtBcConeDR04   ;
+      //  Track pT sum 
+      std::vector<float>  v_pho_trkSumPtSolidConeDR04   ; 
+      //As above, excluding the core at the center of the cone
+      std::vector<float>  v_pho_trkSumPtHollowConeDR04   ;   
+      //Returns number of tracks in a cone of dR
+      std::vector<int>    v_pho_nTrkSolidConeDR04   ;       
+      //As above, excluding the core at the center of the cone
+      std::vector<int>    v_pho_nTrkHollowConeDR04   ;         
+      //
+      std::vector<float>  v_pho_ecalRecHitSumEtConeDR03   ;     
+      std::vector<float>  v_pho_hcalTowerSumEtConeDR03   ;      
+      std::vector<float>  v_pho_hcalDepth1TowerSumEtConeDR03   ;
+      std::vector<float>  v_pho_hcalDepth2TowerSumEtConeDR03   ;
+      std::vector<float>  v_pho_hcalTowerSumEtBcConeDR03   ;    
+      std::vector<float>  v_pho_hcalDepth1TowerSumEtBcConeDR03   ;  
+      std::vector<float>  v_pho_hcalDepth2TowerSumEtBcConeDR03   ;  
+      //  Track pT sum c
+      std::vector<float>  v_pho_trkSumPtSolidConeDR03   ;   
+      //As above, excluding the core at the center of the cone
+      std::vector<float>  v_pho_trkSumPtHollowConeDR03   ;   
+      //Returns number of tracks in a cone of dR
+      std::vector<int>    v_pho_nTrkSolidConeDR03   ;          
+      //As above, excluding the core at the center of the cone
+      std::vector<int>    v_pho_nTrkHollowConeDR03   ;      
+      
+      std::vector<float>  v_pho_chargedHadronIso   ;
+      std::vector<float>  v_pho_chargedHadronIsoWrongVtx   ; 
+      std::vector<float>  v_pho_neutralHadronIso   ; 
+      std::vector<float>  v_pho_photonIso   ; 
+      std::vector<float>  v_pho_sumChargedParticlePt   ; 
+      std::vector<float>  v_pho_sumNeutralHadronEtHighThreshold   ; 
+      std::vector<float>  v_pho_sumPhotonEtHighThreshold   ; 
+      std::vector<float>  v_pho_sumPUPt   ; 
+      
+      
+      std::vector<int>    v_pho_nClusterOutsideMustache   ;
+      std::vector<float>  v_pho_etOutsideMustache   ;
+      std::vector<float>  v_pho_pfMVA   ;
+      
+      
+      
+      
+      
+      
       
       std::vector<std::vector<float>> v_pho_dr;
       std::vector<std::vector<float>> v_pho_dphi;
@@ -281,9 +365,9 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_phi", &v_pho_phi);
    outTree->Branch("v_pho_e", &v_pho_e);
    
-   outTree->Branch("v_pho_hadronicOverEm",   &v_pho_hadronicOverEm  );
-   outTree->Branch("v_pho_chargedHadronIso", &v_pho_chargedHadronIso);
-   outTree->Branch("v_pho_neutralHadronIso", &v_pho_neutralHadronIso);
+//    outTree->Branch("v_pho_hadronicOverEm",   &v_pho_hadronicOverEm  );
+//    outTree->Branch("v_pho_chargedHadronIso", &v_pho_chargedHadronIso);
+//    outTree->Branch("v_pho_neutralHadronIso", &v_pho_neutralHadronIso);
    outTree->Branch("v_pho_photonIso",        &v_pho_photonIso );
    outTree->Branch("v_pho_passElectronVeto", &v_pho_passElectronVeto);
    outTree->Branch("v_pho_hasPixelSeed",     &v_pho_hasPixelSeed );
@@ -382,6 +466,68 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
 //    outTree->Branch("v_pho_subClusDPhi_2"                            ,          &v_pho_subClusDPhi_2 );                          
 //    outTree->Branch("v_pho_subClusDEta_2"                            ,          &v_pho_subClusDEta_2 );                          
 //    
+   
+   
+   outTree->Branch("v_pho_e1x5"                                ,      &v_pho_e1x5                 );                               
+   outTree->Branch("v_pho_e2x5"                                ,      &v_pho_e2x5                 );                               
+   outTree->Branch("v_pho_e5x5"                                ,      &v_pho_e5x5                 );                               
+   outTree->Branch("v_pho_maxEnergyXtal"                       ,      &v_pho_maxEnergyXtal                 );                      
+   outTree->Branch("v_pho_sigmaEtaEta"                         ,      &v_pho_sigmaEtaEta                 );                        
+   outTree->Branch("v_pho_r1x5"                                ,      &v_pho_r1x5                 );                               
+   outTree->Branch("v_pho_r2x5"                                ,      &v_pho_r2x5                 );                               
+   outTree->Branch("v_pho_full5x5_e1x5"                        ,      &v_pho_full5x5_e1x5                 );                       
+   outTree->Branch("v_pho_full5x5_e2x5"                        ,      &v_pho_full5x5_e2x5                 );                       
+   outTree->Branch("v_pho_full5x5_e3x3"                        ,      &v_pho_full5x5_e3x3                 );                       
+   outTree->Branch("v_pho_full5x5_e5x5"                        ,      &v_pho_full5x5_e5x5                 );                       
+   outTree->Branch("v_pho_full5x5_maxEnergyXtal"               ,      &v_pho_full5x5_maxEnergyXtal                 );              
+   outTree->Branch("v_pho_full5x5_sigmaEtaEta"                 ,      &v_pho_full5x5_sigmaEtaEta                 );                
+   outTree->Branch("v_pho_full5x5_sigmaIetaIeta"               ,      &v_pho_full5x5_sigmaIetaIeta                 );              
+   outTree->Branch("v_pho_full5x5_r1x5"                        ,      &v_pho_full5x5_r1x5                 );                       
+   outTree->Branch("v_pho_full5x5_r2x5"                        ,      &v_pho_full5x5_r2x5                 );                       
+   outTree->Branch("v_pho_mipChi2"                             ,      &v_pho_mipChi2                 );                            
+   outTree->Branch("v_pho_mipTotEnergy"                        ,      &v_pho_mipTotEnergy                 );                       
+   outTree->Branch("v_pho_mipSlope"                            ,      &v_pho_mipSlope                 );                           
+   outTree->Branch("v_pho_mipIntercept"                        ,      &v_pho_mipIntercept                 );                       
+   outTree->Branch("v_pho_mipNhitCone"                         ,      &v_pho_mipNhitCone                 );                        
+   outTree->Branch("v_pho_mipIsHalo"                           ,      &v_pho_mipIsHalo                 );                          
+   outTree->Branch("v_pho_ecalRecHitSumEtConeDR04"             ,      &v_pho_ecalRecHitSumEtConeDR04                 );            
+   outTree->Branch("v_pho_hcalTowerSumEtConeDR04"              ,      &v_pho_hcalTowerSumEtConeDR04                 );             
+   outTree->Branch("v_pho_hcalDepth1TowerSumEtConeDR04"        ,      &v_pho_hcalDepth1TowerSumEtConeDR04                 );       
+   outTree->Branch("v_pho_hcalDepth2TowerSumEtConeDR04"        ,      &v_pho_hcalDepth2TowerSumEtConeDR04                 );       
+   outTree->Branch("v_pho_hcalTowerSumEtBcConeDR04"            ,      &v_pho_hcalTowerSumEtBcConeDR04                 );           
+   outTree->Branch("v_pho_hcalDepth1TowerSumEtBcConeDR04"      ,      &v_pho_hcalDepth1TowerSumEtBcConeDR04                 );     
+   outTree->Branch("v_pho_hcalDepth2TowerSumEtBcConeDR04"      ,      &v_pho_hcalDepth2TowerSumEtBcConeDR04                 );     
+   outTree->Branch("v_pho_trkSumPtSolidConeDR04"               ,      &v_pho_trkSumPtSolidConeDR04                 );              
+   outTree->Branch("v_pho_trkSumPtHollowConeDR04"              ,      &v_pho_trkSumPtHollowConeDR04                 );             
+   outTree->Branch("v_pho_nTrkSolidConeDR04"                   ,      &v_pho_nTrkSolidConeDR04                 );                  
+   outTree->Branch("v_pho_nTrkHollowConeDR04"                  ,      &v_pho_nTrkHollowConeDR04                 );                 
+   outTree->Branch("v_pho_ecalRecHitSumEtConeDR03"             ,      &v_pho_ecalRecHitSumEtConeDR03                 );            
+   outTree->Branch("v_pho_hcalTowerSumEtConeDR03"              ,      &v_pho_hcalTowerSumEtConeDR03                 );             
+   outTree->Branch("v_pho_hcalDepth1TowerSumEtConeDR03"        ,      &v_pho_hcalDepth1TowerSumEtConeDR03                 );       
+   outTree->Branch("v_pho_hcalDepth2TowerSumEtConeDR03"        ,      &v_pho_hcalDepth2TowerSumEtConeDR03                 );       
+   outTree->Branch("v_pho_hcalTowerSumEtBcConeDR03"            ,      &v_pho_hcalTowerSumEtBcConeDR03                 );           
+   outTree->Branch("v_pho_hcalDepth1TowerSumEtBcConeDR03"      ,      &v_pho_hcalDepth1TowerSumEtBcConeDR03                 );     
+   outTree->Branch("v_pho_hcalDepth2TowerSumEtBcConeDR03"      ,      &v_pho_hcalDepth2TowerSumEtBcConeDR03                 );     
+   outTree->Branch("v_pho_trkSumPtSolidConeDR03"               ,      &v_pho_trkSumPtSolidConeDR03                 );              
+   outTree->Branch("v_pho_trkSumPtHollowConeDR03"              ,      &v_pho_trkSumPtHollowConeDR03                 );             
+   outTree->Branch("v_pho_nTrkSolidConeDR03"                   ,      &v_pho_nTrkSolidConeDR03                 );                  
+   outTree->Branch("v_pho_nTrkHollowConeDR03"                  ,      &v_pho_nTrkHollowConeDR03                 );                 
+   outTree->Branch("v_pho_chargedHadronIso"                    ,      &v_pho_chargedHadronIso                 );                   
+   outTree->Branch("v_pho_chargedHadronIsoWrongVtx"            ,      &v_pho_chargedHadronIsoWrongVtx                 );           
+   outTree->Branch("v_pho_neutralHadronIso"                    ,      &v_pho_neutralHadronIso                 );                   
+   outTree->Branch("v_pho_photonIso"                           ,      &v_pho_photonIso                 );                          
+   outTree->Branch("v_pho_sumChargedParticlePt"                ,      &v_pho_sumChargedParticlePt                 );               
+   outTree->Branch("v_pho_sumNeutralHadronEtHighThreshold"     ,      &v_pho_sumNeutralHadronEtHighThreshold                 );    
+   outTree->Branch("v_pho_sumPhotonEtHighThreshold"            ,      &v_pho_sumPhotonEtHighThreshold                 );           
+   outTree->Branch("v_pho_sumPUPt"                             ,      &v_pho_sumPUPt                 );                            
+   outTree->Branch("v_pho_nClusterOutsideMustache"             ,      &v_pho_nClusterOutsideMustache                 );            
+   outTree->Branch("v_pho_etOutsideMustache"                   ,      &v_pho_etOutsideMustache                 );                  
+   outTree->Branch("v_pho_pfMVA"                               ,      &v_pho_pfMVA                 );                              
+   
+   
+   
+   
+   
    
    
    //---- gen level variables
@@ -495,9 +641,9 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    v_h4g_tetraphos.clear();
  
    v_pho_hadronicOverEm.clear();  
-   v_pho_chargedHadronIso.clear(); 
-   v_pho_neutralHadronIso.clear(); 
-   v_pho_photonIso.clear(); 
+//    v_pho_chargedHadronIso.clear(); 
+//    v_pho_neutralHadronIso.clear(); 
+//    v_pho_photonIso.clear(); 
    v_pho_passElectronVeto.clear(); 
    v_pho_hasPixelSeed.clear(); 
 //    v_pho_ecalPFClusterIso.clear(); 
@@ -593,6 +739,64 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 //    v_pho_subClusDEta_2                       .clear();
    
    
+   v_pho_e1x5.clear();                             
+   v_pho_e2x5.clear();                             
+   v_pho_e5x5.clear();                             
+   v_pho_maxEnergyXtal.clear();                    
+   v_pho_sigmaEtaEta.clear();                      
+   v_pho_r1x5.clear();                             
+   v_pho_r2x5.clear();                             
+   v_pho_full5x5_e1x5.clear();                     
+   v_pho_full5x5_e2x5.clear();                     
+   v_pho_full5x5_e3x3.clear();                     
+   v_pho_full5x5_e5x5.clear();                     
+   v_pho_full5x5_maxEnergyXtal.clear();            
+   v_pho_full5x5_sigmaEtaEta.clear();              
+   v_pho_full5x5_sigmaIetaIeta.clear();            
+   v_pho_full5x5_r1x5.clear();                     
+   v_pho_full5x5_r2x5.clear();                     
+   v_pho_mipChi2.clear();                          
+   v_pho_mipTotEnergy.clear();                     
+   v_pho_mipSlope.clear();                         
+   v_pho_mipIntercept.clear();                     
+   v_pho_mipNhitCone.clear();                      
+   v_pho_mipIsHalo.clear();                        
+   v_pho_ecalRecHitSumEtConeDR04.clear();          
+   v_pho_hcalTowerSumEtConeDR04.clear();           
+   v_pho_hcalDepth1TowerSumEtConeDR04.clear();     
+   v_pho_hcalDepth2TowerSumEtConeDR04.clear();     
+   v_pho_hcalTowerSumEtBcConeDR04.clear();         
+   v_pho_hcalDepth1TowerSumEtBcConeDR04.clear();   
+   v_pho_hcalDepth2TowerSumEtBcConeDR04.clear();   
+   v_pho_trkSumPtSolidConeDR04.clear();            
+   v_pho_trkSumPtHollowConeDR04.clear();           
+   v_pho_nTrkSolidConeDR04.clear();                
+   v_pho_nTrkHollowConeDR04.clear();               
+   v_pho_ecalRecHitSumEtConeDR03.clear();          
+   v_pho_hcalTowerSumEtConeDR03.clear();           
+   v_pho_hcalDepth1TowerSumEtConeDR03.clear();     
+   v_pho_hcalDepth2TowerSumEtConeDR03.clear();     
+   v_pho_hcalTowerSumEtBcConeDR03.clear();         
+   v_pho_hcalDepth1TowerSumEtBcConeDR03.clear();   
+   v_pho_hcalDepth2TowerSumEtBcConeDR03.clear();   
+   v_pho_trkSumPtSolidConeDR03.clear();            
+   v_pho_trkSumPtHollowConeDR03.clear();           
+   v_pho_nTrkSolidConeDR03.clear();                
+   v_pho_nTrkHollowConeDR03.clear();               
+   v_pho_chargedHadronIso.clear();                 
+   v_pho_chargedHadronIsoWrongVtx.clear();         
+   v_pho_neutralHadronIso.clear();                 
+   v_pho_photonIso.clear();                        
+   v_pho_sumChargedParticlePt.clear();             
+   v_pho_sumNeutralHadronEtHighThreshold.clear();  
+   v_pho_sumPhotonEtHighThreshold.clear();         
+   v_pho_sumPUPt.clear();                          
+   v_pho_nClusterOutsideMustache.clear();          
+   v_pho_etOutsideMustache.clear();                
+   v_pho_pfMVA.clear();                            
+   
+   
+   
    
    v_genlep_p4.clear();
    
@@ -681,9 +885,9 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      v_pho_mva.push_back( pho->userFloat("PhotonMVAEstimatorRun2Spring15NonTrig25nsV2p1Values") );
      
      v_pho_hadronicOverEm.push_back    ( pho->hadronicOverEm() );  
-     v_pho_chargedHadronIso.push_back  ( pho->chargedHadronIso() ); 
-     v_pho_neutralHadronIso.push_back  ( pho->neutralHadronIso() ); 
-     v_pho_photonIso.push_back         ( pho->photonIso() ); 
+//      v_pho_chargedHadronIso.push_back  ( pho->chargedHadronIso() ); 
+//      v_pho_neutralHadronIso.push_back  ( pho->neutralHadronIso() ); 
+//      v_pho_photonIso.push_back         ( pho->photonIso() ); 
      v_pho_passElectronVeto.push_back  ( pho->passElectronVeto() ); 
      v_pho_hasPixelSeed.push_back      ( pho->hasPixelSeed() ); 
 //      v_pho_ecalPFClusterIso.push_back  ( pho->ecalPFClusterIso() ); 
@@ -780,6 +984,62 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 //      v_pho_subClusDPhi_2                       .push_back(  pho->  subClusDPhi                               (2)  );
 //      v_pho_subClusDEta_2                       .push_back(  pho->  subClusDEta                               (2)  );
                                                                                                  
+     v_pho_e1x5                                        .push_back(  pho->   e1x5                                    ()    );
+     v_pho_e2x5                                        .push_back(  pho->   e2x5                                    ()    );
+     v_pho_e5x5                                        .push_back(  pho->   e5x5                                    ()    );
+     v_pho_maxEnergyXtal                               .push_back(  pho->   maxEnergyXtal                           ()    );
+     v_pho_sigmaEtaEta                                 .push_back(  pho->   sigmaEtaEta                             ()    );
+     v_pho_r1x5                                        .push_back(  pho->   r1x5                                    ()    );
+     v_pho_r2x5                                        .push_back(  pho->   r2x5                                    ()    );
+     v_pho_full5x5_e1x5                                .push_back(  pho->   full5x5_e1x5                            ()    );
+     v_pho_full5x5_e2x5                                .push_back(  pho->   full5x5_e2x5                            ()    );
+     v_pho_full5x5_e3x3                                .push_back(  pho->   full5x5_e3x3                            ()    );
+     v_pho_full5x5_e5x5                                .push_back(  pho->   full5x5_e5x5                            ()    );
+     v_pho_full5x5_maxEnergyXtal                       .push_back(  pho->   full5x5_maxEnergyXtal                   ()    );
+     v_pho_full5x5_sigmaEtaEta                         .push_back(  pho->   full5x5_sigmaEtaEta                     ()    );
+     v_pho_full5x5_sigmaIetaIeta                       .push_back(  pho->   full5x5_sigmaIetaIeta                   ()    );
+     v_pho_full5x5_r1x5                                .push_back(  pho->   full5x5_r1x5                            ()    );
+     v_pho_full5x5_r2x5                                .push_back(  pho->   full5x5_r2x5                            ()    );
+     v_pho_mipChi2                                     .push_back(  pho->   mipChi2                                 ()    );
+     v_pho_mipTotEnergy                                .push_back(  pho->   mipTotEnergy                            ()    );
+     v_pho_mipSlope                                    .push_back(  pho->   mipSlope                                ()    );
+     v_pho_mipIntercept                                .push_back(  pho->   mipIntercept                            ()    );
+     v_pho_mipNhitCone                                 .push_back(  pho->   mipNhitCone                             ()    );
+     v_pho_mipIsHalo                                   .push_back(  pho->   mipIsHalo                               ()    );
+     v_pho_ecalRecHitSumEtConeDR04                     .push_back(  pho->   ecalRecHitSumEtConeDR04                 ()    );
+     v_pho_hcalTowerSumEtConeDR04                      .push_back(  pho->   hcalTowerSumEtConeDR04                  ()    );
+     v_pho_hcalDepth1TowerSumEtConeDR04                .push_back(  pho->   hcalDepth1TowerSumEtConeDR04            ()    );
+     v_pho_hcalDepth2TowerSumEtConeDR04                .push_back(  pho->   hcalDepth2TowerSumEtConeDR04            ()    );
+     v_pho_hcalTowerSumEtBcConeDR04                    .push_back(  pho->   hcalTowerSumEtBcConeDR04                ()    );
+     v_pho_hcalDepth1TowerSumEtBcConeDR04              .push_back(  pho->   hcalDepth1TowerSumEtBcConeDR04          ()    );
+     v_pho_hcalDepth2TowerSumEtBcConeDR04              .push_back(  pho->   hcalDepth2TowerSumEtBcConeDR04          ()    );
+     v_pho_trkSumPtSolidConeDR04                       .push_back(  pho->   trkSumPtSolidConeDR04                   ()    );
+     v_pho_trkSumPtHollowConeDR04                      .push_back(  pho->   trkSumPtHollowConeDR04                  ()    );
+     v_pho_nTrkSolidConeDR04                           .push_back(  pho->   nTrkSolidConeDR04                       ()    );
+     v_pho_nTrkHollowConeDR04                          .push_back(  pho->   nTrkHollowConeDR04                      ()    );
+     v_pho_ecalRecHitSumEtConeDR03                     .push_back(  pho->   ecalRecHitSumEtConeDR03                 ()    );
+     v_pho_hcalTowerSumEtConeDR03                      .push_back(  pho->   hcalTowerSumEtConeDR03                  ()    );
+     v_pho_hcalDepth1TowerSumEtConeDR03                .push_back(  pho->   hcalDepth1TowerSumEtConeDR03            ()    );
+     v_pho_hcalDepth2TowerSumEtConeDR03                .push_back(  pho->   hcalDepth2TowerSumEtConeDR03            ()    );
+     v_pho_hcalTowerSumEtBcConeDR03                    .push_back(  pho->   hcalTowerSumEtBcConeDR03                ()    );
+     v_pho_hcalDepth1TowerSumEtBcConeDR03              .push_back(  pho->   hcalDepth1TowerSumEtBcConeDR03          ()    );
+     v_pho_hcalDepth2TowerSumEtBcConeDR03              .push_back(  pho->   hcalDepth2TowerSumEtBcConeDR03          ()    );
+     v_pho_trkSumPtSolidConeDR03                       .push_back(  pho->   trkSumPtSolidConeDR03                   ()    );
+     v_pho_trkSumPtHollowConeDR03                      .push_back(  pho->   trkSumPtHollowConeDR03                  ()    );
+     v_pho_nTrkSolidConeDR03                           .push_back(  pho->   nTrkSolidConeDR03                       ()    );
+     v_pho_nTrkHollowConeDR03                          .push_back(  pho->   nTrkHollowConeDR03                      ()    );
+     v_pho_chargedHadronIso                            .push_back(  pho->   chargedHadronIso                        ()    );
+     v_pho_chargedHadronIsoWrongVtx                    .push_back(  pho->   chargedHadronIsoWrongVtx                ()    );
+     v_pho_neutralHadronIso                            .push_back(  pho->   neutralHadronIso                        ()    );
+     v_pho_photonIso                                   .push_back(  pho->   photonIso                               ()    );
+     v_pho_sumChargedParticlePt                        .push_back(  pho->   sumChargedParticlePt                    ()    );
+     v_pho_sumNeutralHadronEtHighThreshold             .push_back(  pho->   sumNeutralHadronEtHighThreshold         ()    );
+     v_pho_sumPhotonEtHighThreshold                    .push_back(  pho->   sumPhotonEtHighThreshold                ()    );
+     v_pho_sumPUPt                                     .push_back(  pho->   sumPUPt                                 ()    );
+     v_pho_nClusterOutsideMustache                     .push_back(  pho->   nClusterOutsideMustache                 ()    );
+     v_pho_etOutsideMustache                           .push_back(  pho->   etOutsideMustache                       ()    );
+     v_pho_pfMVA                                       .push_back(  pho->   pfMVA                                   ()    );
+     
      
    }
 

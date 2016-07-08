@@ -45,6 +45,7 @@ small test:
     H4GTree->Draw("v_pho_chargedHadronIso");
     H4GTree->Draw("v_pho_r9");
     H4GTree->Draw("v_pho_full5x5_r9");
+    H4GTree->Draw("v_pho_full5x5_e3x3");
 
     H4GTree->Draw("@v_genpho_p4.size()");
 
