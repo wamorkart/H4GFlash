@@ -90,11 +90,11 @@ def main(argv):
    h_gen1_eta = TH1F("h_gen1_eta","gen1 eta;#eta;Events",100,-2.5,2.5)
    h_gen2_eta = TH1F("h_gen2_eta","gen2 eta;#eta;Events",100,-2.5,2.5)
    h_gen3_eta = TH1F("h_gen3_eta","gen3 eta;#eta;Events",100,-2.5,2.5)
-   h_gen4_eta = TH1F("h_gen4_eta","gen #gamma eta;#eta;Events",100,-2.5,2.5)
+   h_gen4_eta = TH1F("h_gen4_eta","#eta of Gen photons;#eta(#gamma);Events",100,-2.5,2.5)
    h_gen1_phi = TH1F("h_gen1_phi","gen #gamma phi;""#phi;Events",100,-4,4)
    h_gen2_phi = TH1F("h_gen2_phi","gen #gamma phi;""#phi;Events",100,-4,4)
    h_gen3_phi = TH1F("h_gen3_phi","gen #gamma phi;""#phi;Events",100,-4,4)
-   h_gen4_phi = TH1F("h_gen4_phi","gen #gamma phi;""#phi;Events",100,-4,4)
+   h_gen4_phi = TH1F("h_gen4_phi","#phi of Gen photons;#phi(#gamma);Events",100,-4,4)
    h_p1_phi = TH1F("h_p1_phi","#phi of photons; #phi(#gamma);Events",100,-4,4)
    h_p2_phi = TH1F("h_p2_phi","#eta of 2nd photon; #eta(#gamma_{2}));Events",100,-4,4)
    h_p3_phi = TH1F("h_p3_phi","#eta of 3rd photon; #eta(#gamma_{3}));Events",100,-4,4)
@@ -108,7 +108,7 @@ def main(argv):
    h_gen_dphi_a1 = TH1F("h_gen_dphi_a1","gen a1 and a2 : #Delta #phi ; #Delta #phi; Events", 100,-4,4)
    h_gen_dphi_a2 = TH1F("h_gen_dphi_a2","gen a1 and a2 :#Delta #phi;#Delta #phi; Events",100,-4,4)
    h_gen_deta_a1 = TH1F("h_gen_deta_a1","gen a1 and a2 : #Delta #eta; #Delta #eta; Events", 100,-4,4)
-   h_gen_deta_a2 = TH1F("h_gen_deta_a2","gen a1 and a2 :#Delta #eta;#delta #eta; Events",100,-4,4)
+   h_gen_deta_a2 = TH1F("h_gen_deta_a2","gen a1 and a2 :#Delta #eta;#Delta #eta; Events",100,-4,4)
    h_dphi_a1 = TH1F("h_dphi_a1","gen a1 and a2 : #Delta #phi ; #Delta #phi; Events", 100,-4,4)
    h_dphi_a2 = TH1F("h_dphi_a2"," a1 and a2 : #Delta #phi ;#Delta #phi; Events",100,-4,4)
    h_deta_a1 = TH1F("h_deta_a1","gen a1 and a2 : #Delta #eta; #Delta #eta; Events", 100,-4,4)
@@ -116,7 +116,7 @@ def main(argv):
    h_gen1_pt = TH1F("h_gen1_pt","gen1 p_{t}; p_{t};Events",100,0,150)
    h_gen2_pt = TH1F("h_gen2_pt","gen2 p_{t}; p_{t};Events",100,0,150)
    h_gen3_pt = TH1F("h_gen3_pt","gen3 p_{t}; p_{t};Events",100,0,150)
-   h_gen4_pt = TH1F("h_pt","gen #gamma p_{t}; p_{t} [GeV];Events",100,0,150)
+   h_gen4_pt = TH1F("h_gen4_pt","p_{t} of Gen photons; p_{t} (#gamma) [GeV];Events",100,0,150)
    
    
 
@@ -133,7 +133,7 @@ def main(argv):
       Phos = []
 
       for p in range(0, tree.n_pho):
- #       print "photon #", p, " pt:",tree.v_pho_pt[p]
+       # print "photon #", p, " pt:",tree.v_pho_pt[p]
         p4 = TLorentzVector(0,0,0,0)
         p4.SetPtEtaPhiE( tree.v_pho_pt[p], tree.v_pho_eta[p], tree.v_pho_phi[p], tree.v_pho_e[p])
         minDR = 999
@@ -285,6 +285,7 @@ def main(argv):
       h_mgggg.Fill(Pgggg.M())
 
       for g in range(0,tree.v_genpho_p4.size()):
+    #     print "photon #", g, " pt:",tree.v_genpho_p4[g]
 
          if tree.v_genpho_p4.size() < 4:
             continue
