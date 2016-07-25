@@ -133,6 +133,7 @@ def main(argv):
       Phos = []
 
       for p in range(0, tree.n_pho):
+       # print evt, " photon #", p, "pt: ", tree.v_pho_p4[p]
        # print "photon #", p, " pt:",tree.v_pho_pt[p]
         p4 = TLorentzVector(0,0,0,0)
         p4.SetPtEtaPhiE( tree.v_pho_pt[p], tree.v_pho_eta[p], tree.v_pho_phi[p], tree.v_pho_e[p])
@@ -143,6 +144,7 @@ def main(argv):
               minDR = dr
         if minDR > 0.01:
            Phos.append(p4)
+#      print evt, " photon #", p, "pt: ", tree.v_pho_p4[p]
            
 
 #      print "Number of photons:", tree.n_pho
@@ -185,7 +187,7 @@ def main(argv):
       
       
      
-
+ #     print evt, " photon #", p, "pt: ", tree.v_pho_p4[p]
       h_n_pho.Fill(tree.n_pho)
       h_n_pho_clean.Fill(len(Phos))
 
@@ -193,7 +195,8 @@ def main(argv):
       P2 = Phos[1]
       P3 = Phos[2]
       P4 = Phos[3]
-
+#      print "reco photon pt ", tree.v_pho_p4[0].pt(), " ", tree.v_pho_p4[1].pt(), " ", tree.v_pho_p4[2].pt(), " ", tree.v_pho_p4[3].pt()
+      
       h_p1_pt.Fill(P1.Pt())
       h_p2_pt.Fill(P2.Pt())
       h_p3_pt.Fill(P3.Pt())
@@ -284,21 +287,25 @@ def main(argv):
       Pgggg = P1 + P2 + P3 + P4
       h_mgggg.Fill(Pgggg.M())
       
-
+      number = 0
       Genphos = []
       
       for g in range(0,tree.v_genpho_p4.size()):
-        # print "photon #", g, " pt:",tree.v_genpho_p4[g]
+         print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g]
          P4 = TLorentzVector(0,0,0,0)
          P4.SetPtEtaPhiE( tree.v_genpho_p4[g].pt(), tree.v_genpho_p4[g].eta(), tree.v_genpho_p4[g].phi(), tree.v_genpho_p4[g].e())
-         minDR = 999
-         for genPho in Genphos:
-           dr = genPho.DeltaR(P4)
-           if dr < minDR:
-              minDR = dr
-         if minDR > 0.0:
-            Genphos.append(P4)
-      Genphos.sort()
+        # minDR = 999
+     #    number=number+1
+         #for genPho in Genphos:
+          # dr = genPho.DeltaR(P4)
+           #if dr < minDR:
+            #  minDR = dr
+         #if minDR > 0.01:
+         Genphos.append(P4)
+      #      print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g
+     # Genphos.sort()
+     # print " ", len(Genphos)
+      print number
       
      
       #print "genphotonpt: ",Genphos[0]
@@ -322,7 +329,7 @@ def main(argv):
          gen3.SetPtEtaPhiE(tree.v_genpho_p4[2].pt(), tree.v_genpho_p4[2].eta(), tree.v_genpho_p4[2].phi(), tree.v_genpho_p4[2].e())
       if tree.v_genpho_p4.size() > 3:
          gen4.SetPtEtaPhiE(tree.v_genpho_p4[3].pt(), tree.v_genpho_p4[3].eta(), tree.v_genpho_p4[3].phi(), tree.v_genpho_p4[3].e())
-    #  print "gen photon pt ", tree.v_genpho_p4[0].pt(), " ", tree.v_genpho_p4[1].pt(), " ", tree.v_genpho_p4[2].pt(), " ", tree.v_genpho_p4[3].pt()
+      print "gen photon pt ", tree.v_genpho_p4[0].pt(), " ", tree.v_genpho_p4[1].pt(), " ", tree.v_genpho_p4[2].pt(), " ", tree.v_genpho_p4[3].pt()
 
       gen12 = gen1+gen2
       gen13 = gen1+gen3
@@ -949,5 +956,3 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
-
-
