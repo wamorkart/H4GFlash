@@ -111,7 +111,7 @@ def main(argv):
    h_gen_deta_a2 = TH1F("h_gen_deta_a2","gen a1 and a2 :#Delta #eta;#Delta #eta; Events",100,-4,4)
    h_dphi_a1 = TH1F("h_dphi_a1","gen a1 and a2 : #Delta #phi ; #Delta #phi; Events", 100,-4,4)
    h_dphi_a2 = TH1F("h_dphi_a2"," a1 and a2 : #Delta #phi ;#Delta #phi; Events",100,-4,4)
-   h_deta_a1 = TH1F("h_deta_a1","gen a1 and a2 : #Delta #eta; #Delta #eta; Events", 100,-4,4)
+   h_deta_a1 = TH1F("h_deta_a1","a1 and a2 : #Delta #eta; #Delta #eta; Events", 100,-4,4)
    h_deta_a2 = TH1F("h_deta_a2","a1 and a2 :#Delta #eta;#Delta #eta; Events",100,-4,4)
    h_gen1_pt = TH1F("h_gen1_pt","gen1 p_{t}; p_{t};Events",100,0,150)
    h_gen2_pt = TH1F("h_gen2_pt","gen2 p_{t}; p_{t};Events",100,0,150)
@@ -283,79 +283,93 @@ def main(argv):
 
       Pgggg = P1 + P2 + P3 + P4
       h_mgggg.Fill(Pgggg.M())
+      
 
+      Genphos = []
+      
       for g in range(0,tree.v_genpho_p4.size()):
     #     print "photon #", g, " pt:",tree.v_genpho_p4[g]
+         p4 = TLorentzVector(0,0,0,0)
+         p4.SetPtEtaPhiE( tree.v_genpho_p4_pt[g], tree.v_genpho_p4_eta[g], tree.v_genpho_p4_phi[g], tree.v_genpho_p4_e[g])
+         minDR = 999
+         for Pho in Genphos:
+           dr = Pho.DeltaR(p4)
+           if dr < minDR:
+              minDR = dr
+         if minDR > 0.0:
+            Genphos.append(p4)
+     
 
-         if tree.v_genpho_p4.size() < 4:
+      if tree.v_genpho_p4.size() < 4:
             continue
 
-         gen1 = TLorentzVector(0,0,0,0)
-         gen2 = TLorentzVector(0,0,0,0)
-         gen3 = TLorentzVector(0,0,0,0)
-         gen4 = TLorentzVector(0,0,0,0)
+      gen1 = TLorentzVector(0,0,0,0)
+      gen2 = TLorentzVector(0,0,0,0)
+      gen3 = TLorentzVector(0,0,0,0)
+      gen4 = TLorentzVector(0,0,0,0)
          
 
 #         print "hello ", tree.v_genpho_p4.size(), " ", evt
-         if tree.v_genpho_p4.size() > 0:
-            gen1.SetPtEtaPhiE(tree.v_genpho_p4[0].pt(), tree.v_genpho_p4[0].eta(), tree.v_genpho_p4[0].phi(), tree.v_genpho_p4[0].e())
-         if tree.v_genpho_p4.size() > 1:
-            gen2.SetPtEtaPhiE(tree.v_genpho_p4[1].pt(), tree.v_genpho_p4[1].eta(), tree.v_genpho_p4[1].phi(), tree.v_genpho_p4[1].e())
-         if tree.v_genpho_p4.size() > 2:
-            gen3.SetPtEtaPhiE(tree.v_genpho_p4[2].pt(), tree.v_genpho_p4[2].eta(), tree.v_genpho_p4[2].phi(), tree.v_genpho_p4[2].e())
-         if tree.v_genpho_p4.size() > 3:
-            gen4.SetPtEtaPhiE(tree.v_genpho_p4[3].pt(), tree.v_genpho_p4[3].eta(), tree.v_genpho_p4[3].phi(), tree.v_genpho_p4[3].e())
+      if tree.v_genpho_p4.size() > 0:
+         gen1.SetPtEtaPhiE(tree.v_genpho_p4[0].pt(), tree.v_genpho_p4[0].eta(), tree.v_genpho_p4[0].phi(), tree.v_genpho_p4[0].e())
+      if tree.v_genpho_p4.size() > 1:
+         gen2.SetPtEtaPhiE(tree.v_genpho_p4[1].pt(), tree.v_genpho_p4[1].eta(), tree.v_genpho_p4[1].phi(), tree.v_genpho_p4[1].e())
+      if tree.v_genpho_p4.size() > 2:
+         gen3.SetPtEtaPhiE(tree.v_genpho_p4[2].pt(), tree.v_genpho_p4[2].eta(), tree.v_genpho_p4[2].phi(), tree.v_genpho_p4[2].e())
+      if tree.v_genpho_p4.size() > 3:
+         gen4.SetPtEtaPhiE(tree.v_genpho_p4[3].pt(), tree.v_genpho_p4[3].eta(), tree.v_genpho_p4[3].phi(), tree.v_genpho_p4[3].e())
+      print "gen photon pt ", tree.v_genpho_p4[0].pt(), " ", tree.v_genpho_p4[1].pt(), " ", tree.v_genpho_p4[2].pt(), " ", tree.v_genpho_p4[3].pt()
 
-         gen12 = gen1+gen2
-         gen13 = gen1+gen3
-         gen14 = gen1+gen4
-         gen23 = gen2+gen3
-         gen24 = gen2+gen4
-         gen34 = gen3+gen4
-         h_mgg12_gen.Fill(gen12.M())
-         h_mgg13_gen.Fill(gen13.M())
-         h_mgg14_gen.Fill(gen14.M())
-         h_mgg23_gen.Fill(gen23.M())
-         h_mgg24_gen.Fill(gen24.M())
-         h_mgg34_gen.Fill(gen34.M())
+      gen12 = gen1+gen2
+      gen13 = gen1+gen3
+      gen14 = gen1+gen4
+      gen23 = gen2+gen3
+      gen24 = gen2+gen4
+      gen34 = gen3+gen4
+      h_mgg12_gen.Fill(gen12.M())
+      h_mgg13_gen.Fill(gen13.M())
+      h_mgg14_gen.Fill(gen14.M())
+      h_mgg23_gen.Fill(gen23.M())
+      h_mgg24_gen.Fill(gen24.M())
+      h_mgg34_gen.Fill(gen34.M())
          
-         diffgen_12_34 = abs(gen12.M() - gen34.M())
-         diffgen_13_24 = abs(gen13.M() - gen24.M())
-         diffgen_14_23 = abs(gen14.M() - gen23.M())
+      diffgen_12_34 = abs(gen12.M() - gen34.M())
+      diffgen_13_24 = abs(gen13.M() - gen24.M())
+      diffgen_14_23 = abs(gen14.M() - gen23.M())
 
-         genPP1 = ""
-         genPP2 = ""
+      genPP1 = ""
+      genPP2 = ""
 
          
-         if diffgen_12_34 < diffgen_13_24 and diffgen_12_34 < diffgen_14_23:
-            genPP1 = gen12
-            genPP2 = gen34
-            h_gen_dr_a1.Fill(gen1.DeltaR(gen2))
-            h_gen_dr_a2.Fill(gen3.DeltaR(gen4))
-            h_gen_dphi_a1.Fill(gen1.DeltaPhi(gen2))
-            h_gen_dphi_a2.Fill(gen3.DeltaPhi(gen4))
-            h_gen_deta_a1.Fill(gen1.Eta()-gen2.Eta())
-            h_gen_deta_a2.Fill(gen3.Eta()-gen4.Eta())
+      if diffgen_12_34 < diffgen_13_24 and diffgen_12_34 < diffgen_14_23:
+         genPP1 = gen12
+         genPP2 = gen34
+         h_gen_dr_a1.Fill(gen1.DeltaR(gen2))
+         h_gen_dr_a2.Fill(gen3.DeltaR(gen4))
+         h_gen_dphi_a1.Fill(gen1.DeltaPhi(gen2))
+         h_gen_dphi_a2.Fill(gen3.DeltaPhi(gen4))
+         h_gen_deta_a1.Fill(gen1.Eta()-gen2.Eta())
+         h_gen_deta_a2.Fill(gen3.Eta()-gen4.Eta())
          
-         if diffgen_13_24 < diffgen_12_34 and diffgen_13_24 < diffgen_14_23:
-            genPP1 = gen13
-            genPP2 = gen24
-            h_gen_dr_a1.Fill(gen1.DeltaR(gen3))
-            h_gen_dr_a2.Fill(gen2.DeltaR(gen4))
-            h_gen_dphi_a1.Fill(gen1.DeltaPhi(gen3))
-            h_gen_dphi_a2.Fill(gen2.DeltaPhi(gen4))
-            h_gen_deta_a1.Fill(gen1.Eta()-gen3.Eta())
-            h_gen_deta_a2.Fill(gen2.Eta()-gen4.Eta()) 
+      if diffgen_13_24 < diffgen_12_34 and diffgen_13_24 < diffgen_14_23:
+         genPP1 = gen13
+         genPP2 = gen24
+         h_gen_dr_a1.Fill(gen1.DeltaR(gen3))
+         h_gen_dr_a2.Fill(gen2.DeltaR(gen4))
+         h_gen_dphi_a1.Fill(gen1.DeltaPhi(gen3))
+         h_gen_dphi_a2.Fill(gen2.DeltaPhi(gen4))
+         h_gen_deta_a1.Fill(gen1.Eta()-gen3.Eta())
+         h_gen_deta_a2.Fill(gen2.Eta()-gen4.Eta()) 
          
-         if diffgen_14_23 < diffgen_12_34 and diffgen_14_23 < diffgen_13_24:
-            genPP1 = gen14
-            genPP2 = gen23
-            h_gen_dr_a1.Fill(gen1.DeltaR(gen4))
-            h_gen_dr_a2.Fill(gen2.DeltaR(gen3))
-            h_gen_dphi_a1.Fill(gen1.DeltaPhi(gen4))
-            h_gen_dphi_a2.Fill(gen2.DeltaPhi(gen3))
-            h_gen_deta_a1.Fill(gen1.Eta()-gen4.Eta())
-            h_gen_deta_a2.Fill(gen2.Eta()-gen3.Eta())
+      if diffgen_14_23 < diffgen_12_34 and diffgen_14_23 < diffgen_13_24:
+         genPP1 = gen14
+         genPP2 = gen23
+         h_gen_dr_a1.Fill(gen1.DeltaR(gen4))
+         h_gen_dr_a2.Fill(gen2.DeltaR(gen3))
+         h_gen_dphi_a1.Fill(gen1.DeltaPhi(gen4))
+         h_gen_dphi_a2.Fill(gen2.DeltaPhi(gen3))
+         h_gen_deta_a1.Fill(gen1.Eta()-gen4.Eta())
+         h_gen_deta_a2.Fill(gen2.Eta()-gen3.Eta())
          
 #         print "hello "
          if genPP1 == "":
@@ -654,7 +668,7 @@ def main(argv):
    h_deta_a2.SetLineColor(4)
    h_deta_a2.GetYaxis().SetTitleOffset(1.5)
    h_deta_a2.SetLineWidth(2)
-   h_deta_a2.SetMaximum(400)
+   h_deta_a2.SetMaximum(1000)
    h_deta_a2.Draw()
    h_deta_a1.SetLineColor(8)
    h_deta_a1.SetLineWidth(2)
