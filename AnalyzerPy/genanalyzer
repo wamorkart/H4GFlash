@@ -78,37 +78,43 @@ def main(argv):
 
 
       Genphos = []
-      
+      number = 0
       for g in range(0,tree.v_genpho_p4.size()):
-      #   print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g].pt()
+       #  print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g].pt()
          P4 = TLorentzVector(0,0,0,0)
          P4.SetPtEtaPhiE( tree.v_genpho_p4[g].pt(), tree.v_genpho_p4[g].eta(), tree.v_genpho_p4[g].phi(), tree.v_genpho_p4[g].e())
+        # print "max pt : ", max(tree.v_genpho_p4[g].pt())
          minDR = 999
-     #    number=number+1
+#         number = number+1
          for genPho in Genphos:
            dr = genPho.DeltaR(P4)
            if dr < minDR:
               minDR = dr
+              #print "dr",dr
+              
          if minDR > 0.01:
             Genphos.append(P4)
-            print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g].pt()
-            sorted(Genphos)   
-     # print " ", len(Genphos)
-     # print number
+            number = number+1
+            #print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g].pt()
+           # sorted(Genphos)   
+           # print " ", len(Genphos)
+            print "number", number
       
      
       #print "genphotonpt: ",Genphos[0]
      
-    #  Genphos.sort()
+         Genphos.sort(reverse=True)
+         #print "pt: ", tree.v_genpho_p4[g].pt()
          if tree.v_genpho_p4.size() < 4:
             continue
+           # print " ",len(Genphos)
   
          gen1 = TLorentzVector(0,0,0,0)
          gen2 = TLorentzVector(0,0,0,0)
          gen3 = TLorentzVector(0,0,0,0)
          gen4 = TLorentzVector(0,0,0,0)
            
-
+        # print evt, "max: " , max(Genphos.pt())
      # print "hello ", tree.v_genpho_p4.size(), " ", evt
          if tree.v_genpho_p4.size() > 0:
             gen1.SetPtEtaPhiE(tree.v_genpho_p4[0].pt(), tree.v_genpho_p4[0].eta(), tree.v_genpho_p4[0].phi(), tree.v_genpho_p4[0].e())
@@ -190,7 +196,7 @@ def main(argv):
       genPgggg = gen1 + gen2 + gen3 + gen4
       h_gen_mgggg.Fill(genPgggg.M())
       
-
+      
       h_gen1_pt.Fill(gen1.Pt())
       h_gen2_pt.Fill(gen2.Pt())
       h_gen3_pt.Fill(gen3.Pt())
@@ -204,7 +210,7 @@ def main(argv):
       h_gen3_phi.Fill(gen3.Phi())
       h_gen4_phi.Fill(gen4.Phi())
 
-
+     
       for mt in tree.myTriggerResults:
 #         print mt.first, mt.second
          if mt.first in triggers:
@@ -212,7 +218,7 @@ def main(argv):
          if mt.first not in triggers:
             triggers[mt.first] = mt.second
       evtCounter += 1
-
+  # print "number", number
    x = []
    xNames = []
    y = []
@@ -275,7 +281,7 @@ def main(argv):
    h_gen4_pt.SetLineColor(4)
    h_gen4_pt.GetYaxis().SetTitleOffset(1.5)
    h_gen4_pt.SetLineWidth(2)
-   h_gen4_pt.SetMaximum(800)
+   h_gen4_pt.SetMaximum(2500)
    h_gen4_pt.Draw()
    h_gen3_pt.SetLineColor(8)
    h_gen3_pt.SetLineWidth(2)
@@ -489,4 +495,5 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
+
 
