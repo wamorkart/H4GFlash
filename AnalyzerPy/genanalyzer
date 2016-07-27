@@ -83,7 +83,7 @@ def main(argv):
        #  print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g].pt()
          P4 = TLorentzVector(0,0,0,0)
          P4.SetPtEtaPhiE( tree.v_genpho_p4[g].pt(), tree.v_genpho_p4[g].eta(), tree.v_genpho_p4[g].phi(), tree.v_genpho_p4[g].e())
-        # print "max pt : ", max(tree.v_genpho_p4[g].pt())
+        # print "max pt : ", max(P4.pt())
          minDR = 999
 #         number = number+1
          for genPho in Genphos:
@@ -94,6 +94,7 @@ def main(argv):
               
          if minDR > 0.01:
             Genphos.append(P4)
+            print "max pt : ", max(Genphos.pt())
             number = number+1
             #print evt, " photon #", g, " pt: ", tree.v_genpho_p4[g].pt()
            # sorted(Genphos)   
@@ -103,7 +104,7 @@ def main(argv):
      
       #print "genphotonpt: ",Genphos[0]
      
-         Genphos.sort(reverse=True)
+         #Genphos.sort(reverse=True)
          #print "pt: ", tree.v_genpho_p4[g].pt()
          if tree.v_genpho_p4.size() < 4:
             continue
@@ -495,5 +496,3 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
-
-
