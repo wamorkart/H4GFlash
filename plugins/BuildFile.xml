@@ -21,6 +21,5 @@
 <use name="SimDataFormats/GeneratorProducts"/>
 <use name="DataFormats/EgammaCandidates"/>
 <use name="flashgg/H4GFlash"/>
-<flags EDM_PLUGIN="1"/>
 
 <flags EDM_PLUGIN="1"/>

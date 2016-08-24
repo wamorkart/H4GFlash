@@ -1,0 +1,44 @@
+{
+    "processes" : {
+        "SUSYGluGluToHToAA_AToGG_M-0p1_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-0p1_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-1_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-1_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-20_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-20_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-25_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-25_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-40_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-40_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-45_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-45_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-50_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-50_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ],
+        "SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8" : [
+            ["/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8", {"args" : ["campaign=SigH4G_80X_v1"]}]
+        ]
+	},
+	"cmdLine" : "campaign=SigH4G_80X_v1 targetLumi=15e+3 PURW=False"
+}

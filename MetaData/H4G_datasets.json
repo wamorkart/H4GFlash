@@ -1,0 +1,443 @@
+{
+    "/SUSYGluGluToHToAA_AToGG_M-0p1_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 200000, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-0p1_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_101621/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 200000, 
+                "totEvents": 200000, 
+                "weights": 200000.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 899, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 899, 
+                "totEvents": 899, 
+                "weights": 899.0
+            }, 
+            {
+                "bad": false, 
+                "events": 78213, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 78213, 
+                "totEvents": 78213, 
+                "weights": 78213.0
+            }, 
+            {
+                "bad": false, 
+                "events": 1798, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 1798, 
+                "totEvents": 1798, 
+                "weights": 1798.0
+            }, 
+            {
+                "bad": false, 
+                "events": 58435, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_4.root", 
+                "nevents": 58435, 
+                "totEvents": 58435, 
+                "weights": 58435.0
+            }, 
+            {
+                "bad": false, 
+                "events": 38180, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_5.root", 
+                "nevents": 38180, 
+                "totEvents": 38180, 
+                "weights": 38180.0
+            }, 
+            {
+                "bad": false, 
+                "events": 13485, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_6.root", 
+                "nevents": 13485, 
+                "totEvents": 13485, 
+                "weights": 13485.0
+            }, 
+            {
+                "bad": false, 
+                "events": 4495, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-10_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v2/160629_101745/0000/myMicroAODOutputFile_7.root", 
+                "nevents": 4495, 
+                "totEvents": 4495, 
+                "weights": 4495.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 75488, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_101903/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 75488, 
+                "totEvents": 75488, 
+                "weights": 75488.0
+            }, 
+            {
+                "bad": false, 
+                "events": 54936, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_101903/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 54936, 
+                "totEvents": 54936, 
+                "weights": 54936.0
+            }, 
+            {
+                "bad": false, 
+                "events": 65912, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_101903/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 65912, 
+                "totEvents": 65912, 
+                "weights": 65912.0
+            }, 
+            {
+                "bad": false, 
+                "events": 2776, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-15_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_101903/0000/myMicroAODOutputFile_4.root", 
+                "nevents": 2776, 
+                "totEvents": 2776, 
+                "weights": 2776.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-1_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 65616, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-1_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102034/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 65616, 
+                "totEvents": 65616, 
+                "weights": 65616.0
+            }, 
+            {
+                "bad": false, 
+                "events": 31520, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-1_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102034/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 31520, 
+                "totEvents": 31520, 
+                "weights": 31520.0
+            }, 
+            {
+                "bad": false, 
+                "events": 98944, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-1_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102034/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 98944, 
+                "totEvents": 98944, 
+                "weights": 98944.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-20_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 5020, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-20_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102151/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 5020, 
+                "totEvents": 5020, 
+                "weights": 5020.0
+            }, 
+            {
+                "bad": false, 
+                "events": 194980, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-20_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102151/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 194980, 
+                "totEvents": 194980, 
+                "weights": 194980.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-25_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 86936, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-25_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102328/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 86936, 
+                "totEvents": 86936, 
+                "weights": 86936.0
+            }, 
+            {
+                "bad": false, 
+                "events": 109184, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-25_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102328/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 109184, 
+                "totEvents": 109184, 
+                "weights": 109184.0
+            }, 
+            {
+                "bad": false, 
+                "events": 2928, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-25_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102328/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 2928, 
+                "totEvents": 2928, 
+                "weights": 2928.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 75210, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102458/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 75210, 
+                "totEvents": 75210, 
+                "weights": 75210.0
+            }, 
+            {
+                "bad": false, 
+                "events": 42670, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102458/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 42670, 
+                "totEvents": 42670, 
+                "weights": 42670.0
+            }, 
+            {
+                "bad": false, 
+                "events": 15380, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102458/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 15380, 
+                "totEvents": 15380, 
+                "weights": 15380.0
+            }, 
+            {
+                "bad": false, 
+                "events": 16760, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102458/0000/myMicroAODOutputFile_4.root", 
+                "nevents": 16760, 
+                "totEvents": 16760, 
+                "weights": 16760.0
+            }, 
+            {
+                "bad": false, 
+                "events": 49090, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-35_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102458/0000/myMicroAODOutputFile_5.root", 
+                "nevents": 49090, 
+                "totEvents": 49090, 
+                "weights": 49090.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-40_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 18217, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-40_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102633/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 18217, 
+                "totEvents": 18217, 
+                "weights": 18217.0
+            }, 
+            {
+                "bad": false, 
+                "events": 60726, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-40_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102633/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 60726, 
+                "totEvents": 60726, 
+                "weights": 60726.0
+            }, 
+            {
+                "bad": false, 
+                "events": 121057, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-40_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102633/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 121057, 
+                "totEvents": 121057, 
+                "weights": 121057.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-45_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 100338, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-45_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102802/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 100338, 
+                "totEvents": 100338, 
+                "weights": 100338.0
+            }, 
+            {
+                "bad": false, 
+                "events": 88482, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-45_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102802/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 88482, 
+                "totEvents": 88482, 
+                "weights": 88482.0
+            }, 
+            {
+                "bad": false, 
+                "events": 7068, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-45_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102802/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 7068, 
+                "totEvents": 7068, 
+                "weights": 7068.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-50_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 58612, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-50_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102928/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 58612, 
+                "totEvents": 58612, 
+                "weights": 58612.0
+            }, 
+            {
+                "bad": false, 
+                "events": 140377, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-50_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_102928/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 140377, 
+                "totEvents": 140377, 
+                "weights": 140377.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 33821, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103101/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 33821, 
+                "totEvents": 33821, 
+                "weights": 33821.0
+            }, 
+            {
+                "bad": false, 
+                "events": 7055, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103101/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 7055, 
+                "totEvents": 7055, 
+                "weights": 7055.0
+            }, 
+            {
+                "bad": false, 
+                "events": 86155, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103101/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 86155, 
+                "totEvents": 86155, 
+                "weights": 86155.0
+            }, 
+            {
+                "bad": false, 
+                "events": 72878, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-55_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103101/0000/myMicroAODOutputFile_4.root", 
+                "nevents": 72878, 
+                "totEvents": 72878, 
+                "weights": 72878.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 761, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103228/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 761, 
+                "totEvents": 761, 
+                "weights": 761.0
+            }, 
+            {
+                "bad": false, 
+                "events": 67890, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103228/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 67890, 
+                "totEvents": 67890, 
+                "weights": 67890.0
+            }, 
+            {
+                "bad": false, 
+                "events": 8971, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103228/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 8971, 
+                "totEvents": 8971, 
+                "weights": 8971.0
+            }, 
+            {
+                "bad": false, 
+                "events": 62558, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103228/0000/myMicroAODOutputFile_4.root", 
+                "nevents": 62558, 
+                "totEvents": 62558, 
+                "weights": 62558.0
+            }, 
+            {
+                "bad": false, 
+                "events": 59820, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-5_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103228/0000/myMicroAODOutputFile_5.root", 
+                "nevents": 59820, 
+                "totEvents": 59820, 
+                "weights": 59820.0
+            }
+        ], 
+        "vetted": true
+    }, 
+    "/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8/RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/MINIAODSIM": {
+        "files": [
+            {
+                "bad": false, 
+                "events": 16550, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103353/0000/myMicroAODOutputFile_1.root", 
+                "nevents": 16550, 
+                "totEvents": 16550, 
+                "weights": 16550.0
+            }, 
+            {
+                "bad": false, 
+                "events": 48340, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103353/0000/myMicroAODOutputFile_2.root", 
+                "nevents": 48340, 
+                "totEvents": 48340, 
+                "weights": 48340.0
+            }, 
+            {
+                "bad": false, 
+                "events": 48078, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103353/0000/myMicroAODOutputFile_3.root", 
+                "nevents": 48078, 
+                "totEvents": 48078, 
+                "weights": 48078.0
+            }, 
+            {
+                "bad": false, 
+                "events": 36782, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103353/0000/myMicroAODOutputFile_4.root", 
+                "nevents": 36782, 
+                "totEvents": 36782, 
+                "weights": 36782.0
+            }, 
+            {
+                "bad": false, 
+                "events": 47478, 
+                "name": "/store/user/rateixei/H4G/MicroAOD/SigH4G_80X_v1/rel808/SUSYGluGluToHToAA_AToGG_M-60_TuneCUETP8M1_13TeV_pythia8/SigH4G_80X_v1-rel808-v0-RunIISpring16MiniAODv2-PUSpring16RAWAODSIM_80X_mcRun2_asymptotic_2016_miniAODv2_v0-v1/160629_103353/0000/myMicroAODOutputFile_5.root", 
+                "nevents": 47478, 
+                "totEvents": 47478, 
+                "weights": 47478.0
+            }
+        ], 
+        "vetted": true
+    }
+}

@@ -50,6 +50,7 @@
 #include "flashgg/H4GFlash/interface/H4GTools.h"
 #include "FWCore/Common/interface/TriggerNames.h"
 #include "DataFormats/Common/interface/TriggerResults.h"
+#include "flashgg/Taggers/interface/GlobalVariablesDumper.h"
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
@@ -89,9 +90,12 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       edm::EDGetTokenT<edm::TriggerResults> triggerToken_;
       long int counter;
 
+      flashgg::GlobalVariablesDumper* globVar_;
+
       //Out tree elements:
       TTree* outTree;
       int n_pho, run, lumi, evtnum, passTrigger;
+      double rho;
       std::vector<H4GTools::H4G_DiPhoton> v_h4g_diphos;
       std::vector<H4GTools::H4G_TetraPhoton> v_h4g_tetraphos;
       std::vector<LorentzVector> v_pho_p4;
@@ -346,13 +350,17 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
     genParticlesToken_( consumes<edm::View<reco::GenParticle> >( iConfig.getUntrackedParameter<edm::InputTag>( "genparticles", edm::InputTag( "prunedGenParticles" ) ) ) )
 {
    //now do what ever initialization is needed
+   globVar_ = new flashgg::GlobalVariablesDumper(iConfig, consumesCollector() );
+   double lumiWeight_ = ( iConfig.getParameter<double>( "lumiWeight" ) );
+   globVar_->dumpLumiFactor(lumiWeight_);
    usesResource("TFileService");
    edm::Service<TFileService> fs;
    outTree = fs->make<TTree> ("H4GTree", "Tree for h->4g analysis");
-   outTree->Branch("run", &run, "run/I");
-   outTree->Branch("lumi", &lumi, "lumi/I");
-   outTree->Branch("evtnum", &evtnum, "evtnum/I");
+//   outTree->Branch("run", &run, "run/I");
+//   outTree->Branch("lumi", &lumi, "lumi/I");
+//   outTree->Branch("evtnum", &evtnum, "evtnum/I");
 
+   outTree->Branch("rho", &rho, "rho/D");
    outTree->Branch("passTrigger", &passTrigger, "passTrigger/I");
    outTree->Branch("v_h4g_diphos", &v_h4g_diphos);
    outTree->Branch("v_h4g_tetraphos", &v_h4g_tetraphos);
@@ -365,7 +373,7 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_phi", &v_pho_phi);
    outTree->Branch("v_pho_e", &v_pho_e);
    
-//    outTree->Branch("v_pho_hadronicOverEm",   &v_pho_hadronicOverEm  );
+   outTree->Branch("v_pho_hadronicOverEm",   &v_pho_hadronicOverEm  );
 //    outTree->Branch("v_pho_chargedHadronIso", &v_pho_chargedHadronIso);
 //    outTree->Branch("v_pho_neutralHadronIso", &v_pho_neutralHadronIso);
    outTree->Branch("v_pho_photonIso",        &v_pho_photonIso );
@@ -553,6 +561,9 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    
    outTree->Branch("myTriggerResults", &myTriggerResults);
 
+   std::map<std::string, std::string> replacements;
+   globVar_->bookTreeVariables(outTree, replacements);
+
    counter = 0;
 
    //Get parameters
@@ -588,9 +599,9 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
    using namespace edm;
 
-   run = iEvent.id().run();
-   lumi = iEvent.id().luminosityBlock();
-   evtnum = iEvent.id().event();
+   globVar_->fill(iEvent);
+   const double rhoFixedGrd = globVar_->valueOf(globVar_->indexOf("rho"));
+   rho = rhoFixedGrd;
 
    edm::Handle<edm::View<flashgg::DiPhotonCandidate> > diphotons;
    iEvent.getByToken(diphotonsToken_, diphotons);

@@ -31,6 +31,5 @@ AutoDict_*
 LimitSetting/*
 
 #test
-test/*json
 *lumi.json
 *fggRunJob*
