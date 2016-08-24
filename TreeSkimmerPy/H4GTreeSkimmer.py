@@ -105,7 +105,7 @@ def main(argv):
       P12 = Phos[0] + Phos[1]
       treeSkimmer.dphigh_mass[0] = P12.M()
 
-      pairedDiphos = treeSkimmer.MakePairing(Phos)
+      pairedDiphos = treeSkimmer.MakePairing(sPhos)
       #arr = [[Dipho1, P1, iP1, P2, iP2], [Dipho2, P3, iP3, P4, iP4]
       PP1 = pairedDiphos[0][0]
       PP2 = pairedDiphos[1][0]
@@ -207,7 +207,7 @@ def main(argv):
       treeSkimmer.dp2_phi[0] = PP2.Phi()
       treeSkimmer.dp2_mass[0] = PP2.M()
 
-      Pgggg = Phos[0] + Phos[1] + Phos[2] + Phos[3]
+      Pgggg = sPhos[0] + sPhos[1] + sPhos[2] + sPhos[3]
       treeSkimmer.tp_pt[0] = Pgggg.Pt()
       treeSkimmer.tp_eta[0] = Pgggg.Eta()
       treeSkimmer.tp_phi[0] = Pgggg.Phi()
