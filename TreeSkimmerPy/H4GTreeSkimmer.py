@@ -80,7 +80,7 @@ def main(argv):
       if len(sPhos) < 2: continue
 
       #R9, CHIso, HoE, PSeed
-      triggeredDipho = treeSkimmer.MakeTriggerSelection(Phos, Phos_id, tree.v_pho_full5x5_r9, tree.v_pho_chargedHadronIso, tree.v_pho_hadronicOverEm, tree.v_pho_hasPixelSeed)
+      triggeredDipho = treeSkimmer.MakeTriggerSelection(sPhos, sPhos_id, tree.v_pho_full5x5_r9, tree.v_pho_chargedHadronIso, tree.v_pho_hadronicOverEm, tree.v_pho_hasPixelSeed)
 
       if triggeredDipho == 0: #no diphoton triggered
         continue
