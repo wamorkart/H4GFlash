@@ -1,0 +1,8 @@
+{
+    "processes" : {
+        "DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa" : [
+            ["/DiPhotonJetsBox_MGG-80toInf_13TeV-Sherpa", {"args" : ["campaign=RunIISpring16DR80X-2_2_0-25ns_ICHEP16_MiniAODv2"]}]
+        ]
+	},
+	"cmdLine" : "campaign=RunIISpring16DR80X-2_2_0-25ns_ICHEP16_MiniAODv2 targetLumi=15e+3 PURW=False"
+}

@@ -17,6 +17,10 @@ class SkimmedTreeTools:
       self.p2_phi = n.zeros(1, dtype=float)
       self.p3_phi = n.zeros(1, dtype=float)
       self.p4_phi = n.zeros(1, dtype=float)
+      self.p1_mva = n.zeros(1, dtype=float)
+      self.p2_mva = n.zeros(1, dtype=float)
+      self.p3_mva = n.zeros(1, dtype=float)
+      self.p4_mva = n.zeros(1, dtype=float)
       self.p_mindr = n.zeros(1, dtype=float)
       self.dp1_pt = n.zeros(1, dtype=float)
       self.dp1_eta = n.zeros(1, dtype=float)
@@ -60,6 +64,10 @@ class SkimmedTreeTools:
       outTree.Branch('p2_phi', self.p2_phi, 'p2_phi/D')
       outTree.Branch('p3_phi', self.p3_phi, 'p3_phi/D')
       outTree.Branch('p4_phi', self.p4_phi, 'p4_phi/D')
+      outTree.Branch('p1_mva', self.p1_mva, 'p1_mva/D')
+      outTree.Branch('p2_mva', self.p2_mva, 'p2_mva/D')
+      outTree.Branch('p3_mva', self.p3_mva, 'p3_mva/D')
+      outTree.Branch('p4_mva', self.p4_mva, 'p4_mva/D')
       outTree.Branch('p_mindr', self.p_mindr, 'p_mindr/D')
       outTree.Branch('dp1_pt', self.dp1_pt, 'dp1_pt/D')
       outTree.Branch('dp1_eta', self.dp1_eta, 'dp1_eta/D')
@@ -89,8 +97,33 @@ class SkimmedTreeTools:
 
       return outTree
 
-   def MakePhotonSelection(self, Phos, Phos_id):
-      return Phos, Phos_id
+   def MakePhotonSelection(self, Phos, Phos_id, MVA):
+      sPhos = []
+      sPhos_id = []
+      for i,pho in enumerate(Phos):
+         if pho.Pt() < 15: continue
+         if abs(pho.Eta()) > 2.5: continue
+         if abs(pho.Eta()) < 1.5 and MVA[Phos_id[i]] < 0.295: continue
+         if abs(pho.Eta()) > 1.5 and MVA[Phos_id[i]] < 0.458: continue
+
+         sPhos.append(pho)
+         sPhos_id.append(Phos_id[i])
+
+      return sPhos, sPhos_id
+
+   def SelectWithFakes(self, Phos, Phos_id, MVA):
+      fPhos = []
+      fPhos_id = []
+      for i,pho in enumerate(Phos):
+         if pho.Pt() < 15: continue
+         if abs(pho.Eta()) > 2.5: continue
+         if abs(pho.Eta()) < 1.5 and MVA[Phos_id[i]] > 0.295: continue
+         if abs(pho.Eta()) > 1.5 and MVA[Phos_id[i]] > 0.458: continue
+
+         fPhos.append(pho)
+         fPhos_id.append(Phos_id[i])
+
+      return fPhos, fPhos_id
 
    def MakeTriggerSelection(self, Phos, Phos_id, R9, CHIso, HoE, PSeed):
       #based on trigger: HLT_Diphoton30PV_18PV_R9Id_AND_IsoCaloId_AND_HE_R9Id_DoublePixelVeto_Mass55
