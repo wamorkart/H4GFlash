@@ -92,7 +92,7 @@ def main(argv):
          phomatrix = [[x,y] for x,y in zip(sPhos, sPhos_id)]
          fakematrix = [[x,y] for x,y in zip(fPhos, fPhos_id)]
          phomatrixreduced = phomatrix[:(ntotpho-nfakes)]
-         fakematrixreduced = phomatrix[:(nfakes)]
+         fakematrixreduced = fakematrix[:(nfakes)]
          totmatrix = phomatrixreduced+fakematrixreduced
          totmatrix.sort(key=lambda x: x[0].Pt(), reverse=True)
          sPhos = [x[0] for x in totmatrix]
