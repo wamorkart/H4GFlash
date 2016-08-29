@@ -605,11 +605,6 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
    edm::Handle<edm::View<flashgg::DiPhotonCandidate> > diphotons;
    iEvent.getByToken(diphotonsToken_, diphotons);
-   edm::Handle<edm::View<pat::PackedGenParticle> > genPhotons;
-   iEvent.getByToken(genPhotonsToken_,genPhotons);
-
-   edm::Handle<edm::View<reco::GenParticle> > genParticles;
-   iEvent.getByToken(genParticlesToken_,genParticles);
       
     //Trigger
     myTriggerResults.clear();
@@ -1140,63 +1135,47 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
      
    }
    
-   // ---- Save prompt photon gen information
-   for( size_t g = 0; g < genPhotons->size(); g++) {
-      const auto gen = genPhotons->ptrAt(g);
+   if( ! iEvent.isRealData() ) {
+      edm::Handle<edm::View<pat::PackedGenParticle> > genPhotons;
+      iEvent.getByToken(genPhotonsToken_,genPhotons);
+      // ---- Save prompt photon gen information
+      for( size_t g = 0; g < genPhotons->size(); g++) {
+         const auto gen = genPhotons->ptrAt(g);
 
       //Only save gen information of prompt+final state photons (this includes FSR/ISR)
-      if( gen->isPromptFinalState() == 0 ) continue;
+         if( gen->isPromptFinalState() == 0 ) continue;
 
-      //---- stable and ready to be propagated via Geant4
-//       if( gen->status() == 1 ) continue;
-      
-      
-      //Only save photons
-      if( gen->pdgId() != 22 ) continue;
+         if( gen->pdgId() != 22 ) continue;
 
-      v_genpho_p4.push_back( gen->p4() );
-
-//       int motherPDGID = -999;
-//       const reco::Candidate* pMother = 0;
-//       std::cout << " g[" << 0 << "] gen->numberOfMothers() = " << gen->numberOfMothers() << std::endl;
-//       
-//       if (gen->numberOfMothers() >= 1) {
-//         pMother = gen->mother(0);
-//         motherPDGID = pMother->pdgId();
-//       }
-//       v_genpho_motherpdgid.push_back(motherPDGID);
-
+         v_genpho_p4.push_back( gen->p4() );
+      }
+ 
+      edm::Handle<edm::View<reco::GenParticle> > genParticles;
+      iEvent.getByToken(genParticlesToken_,genParticles);
+      //---- Loop over gen particles
+      for (size_t gp=0; gp<genParticles->size(); ++gp) {
+        const auto gen = genParticles->ptrAt(gp);
+ 
+        int type = gen->pdgId();    
+        if ( abs(type) == 25 ) { //---- a
+          v_gen_a_mass .push_back(gen->mass());
+          v_gen_a_pt .push_back(gen->pt());
+          v_gen_a_phi.push_back(gen->phi());
+          v_gen_a_eta.push_back(gen->eta());
+          v_gen_a_id .push_back(1. * type);  
+        }
+        if ( abs(type) == 35 ) {  //---- X
+          v_gen_X_mass .push_back(gen->mass());
+          v_gen_X_pt .push_back(gen->pt());
+          v_gen_X_phi.push_back(gen->phi());
+          v_gen_X_eta.push_back(gen->eta());
+          v_gen_X_id .push_back(1. * type);  
+        }
+        if (( abs(type) == 11 || abs(type) == 13 || abs(type) == 15 ) && (gen->isPromptFinalState() == 1)) {  //---- leptons (only prompt)
+          v_genlep_p4.push_back( gen->p4() );
+        }
+     }
    }
-   
-   //---- Loop over gen particles
-   for (size_t gp=0; gp<genParticles->size(); ++gp) {
-
-     const auto gen = genParticles->ptrAt(gp);
-     
-     int type = gen->pdgId();
-     
-     if ( abs(type) == 25 ) { //---- a
-       v_gen_a_mass .push_back(gen->mass());
-       v_gen_a_pt .push_back(gen->pt());
-       v_gen_a_phi.push_back(gen->phi());
-       v_gen_a_eta.push_back(gen->eta());
-       v_gen_a_id .push_back(1. * type);  
-     }
-     
-     if ( abs(type) == 35 ) {  //---- X
-       v_gen_X_mass .push_back(gen->mass());
-       v_gen_X_pt .push_back(gen->pt());
-       v_gen_X_phi.push_back(gen->phi());
-       v_gen_X_eta.push_back(gen->eta());
-       v_gen_X_id .push_back(1. * type);  
-     }
-     
-     
-     if (( abs(type) == 11 || abs(type) == 13 || abs(type) == 15 ) && (gen->isPromptFinalState() == 1)) {  //---- leptons (only prompt)
-       v_genlep_p4.push_back( gen->p4() );
-     }
-     
-  }
     
    // Save the info
    outTree->Fill();

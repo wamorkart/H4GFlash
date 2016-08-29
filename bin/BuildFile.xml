@@ -1,0 +1,11 @@
+<bin name="AnalysisFits" file="AnalysisFits.C">
+	<use name="boost_program_options"/>
+	<use name="boost"/>
+	<use name="boost_system"/>
+	<use name="root"/>
+	<use name="roofit"/>
+	<use name="rootcore"/>
+	<use name="roofitcore"/>
+	<use name="roostats"/>
+	<use name="flashgg/H4GFlash"/>
+</bin>                                                                        

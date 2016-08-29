@@ -1,0 +1,47 @@
+{
+  "file" : "/afs/cern.ch/work/r/rateixei/work/NEU_H4G/Flashgg/Aug24/CMSSW_8_0_8_patch1/src/flashgg/H4GFlash/TreeSkimmerPy/root/DiPhoJets.root",
+  "vars" : { 
+        	"tp_mass[100, 180]" : "M(#gamma#gamma#gamma#gamma)"
+	   },
+  "nbins" : ["80"],
+  "prefix" : "H4G_Fit_",
+  "plotsDir" : "/afs/cern.ch/user/r/rateixei/www/H4G/",
+  "selection" : "tp_mass > 100 && tp_mass < 180",
+  "plotTitle" : "No Cat.",
+  "categories" : { 
+			"noreq" : "1 "
+		 },
+  "blinding" : { " && ( 1 )" : "0" },
+  "functions" : [
+
+                "RooFormulaVar:mod_b2_p0_mgg_bb('b2_p0_mgg_bb*b2_p0_mgg_bb', {b2_p0_mgg_bb[0.3, -10, 10]})",
+                "RooFormulaVar:mod_b2_p1_mgg_bb('b2_p1_mgg_bb*b2_p1_mgg_bb', {b2_p1_mgg_bb[0.2, -10, 10]})",
+                "RooFormulaVar:mod_b2_p2_mgg_bb('b2_p2_mgg_bb*b2_p2_mgg_bb', {b2_p2_mgg_bb[0.1, -10, 10]})",
+                "RooFormulaVar:mod_b2_p3_mgg_bb('b2_p3_mgg_bb*b2_p3_mgg_bb', {b2_p3_mgg_bb[0.1, -10, 10]})",
+                "RooBernstein:Bern3_tp_mass(tp_mass, {mod_b2_p0_mgg_bb, mod_b2_p1_mgg_bb, mod_b2_p2_mgg_bb, mod_b2_p3_mgg_bb} )"
+
+	],
+  "functionsToFit" :  ["Bern3_tp_mass"],
+  "functionsToPlot" : ["Bern3_tp_mass"],
+  "biasFunctions" :   ["Bern3_tp_mass"],
+  "functionLegends" : ["3rd Order Bernstein"],
+  "error" : "0",
+  "signal_File" : "/afs/cern.ch/work/r/rateixei/work/NEU_H4G/Flashgg/Aug24/CMSSW_8_0_8_patch1/src/flashgg/H4GFlash/TreeSkimmerPy/root/signal_m_50.root",
+  "signal_Functions" : [
+
+      "RooGaussian:GausCB_tp_mass(tp_mass, meanSigCB[125, 120, 128], sigmaSigCB[3.0, 0.5, 8.0])",
+      "RooCBShape:CBSig_tp_mass(tp_mass, meanSigCB, cb_sigma[1.0, 0.50, 3.0], cb_alpha[.5, 0.001, 2.], cb_n[5., 1., 15.0])",
+      "SUM:SigCBGaus_tp_mass(ng1cb[0.85, 0.7, 0.99]*CBSig_tp_mass, GausCB_tp_mass)"
+
+  ],
+  "signal_functionsToFit" : ["SigCBGaus_tp_mass"],
+  "signal_functionsToPlot" : ["SigCBGaus_tp_mass:CBSig_tp_mass,GausCB_tp_mass"],
+  "signalFit" : "SignalModel",
+  "signal_norm_lumi_fb" : 2.7,
+  "signal_norm_totEvs" : 50000,
+  "signal_norm_xsec" : 1,
+  "bkgNorm" : 1,
+  "bkgNorm_up" : 50,
+  "bkgNorm_down" : -50
+}
+

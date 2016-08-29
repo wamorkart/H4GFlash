@@ -18,19 +18,27 @@ process.h4gflash.mcPu=cms.vdouble()
 
 print "I'M HERE 1"
 
+print "1.01"
+
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
     fileNames = cms.untracked.vstring("test.root")
 )
+
+print "1.1"
 
 process.TFileService = cms.Service("TFileService",
       fileName = cms.string("out.root"),
       closeFileFast = cms.untracked.bool(True)
   )
 
+print "2"
+
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32( 2000 )
+
+print "2.1"
 
 # import flashgg customization
 from flashgg.MetaData.JobConfig import customize
@@ -38,6 +46,8 @@ import FWCore.ParameterSet.VarParsing as VarParsing
 # set default options if needed
 customize.setDefault("maxEvents",-1)
 customize.setDefault("targetLumi",2.58e+3)
+
+print "2.2"
 
 customize.register('PURW',
 				True,
@@ -48,6 +58,8 @@ customize.register('PURW',
 
 # call the customization
 customize(process)
+
+print "3"
 
 process.h4gflash.puReWeight=cms.bool( customize.PURW )
 if customize.PURW == False:
@@ -62,6 +74,8 @@ if customize.inputFiles:
 
 if customize.outputFile:
         outputFile = customize.outputFile
+
+print "4"
 
 if customize.processId == "Data":
         from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel
@@ -81,5 +95,7 @@ if customize.processId == "Data":
 
 process.load("flashgg.Taggers.flashggTags_cff")
 process.h4gflash.OutFileName = cms.untracked.string(outputFile)
+
+print "5"
 
 process.p = cms.Path(flashggTags.flashggUnpackedJets*process.h4gflash)

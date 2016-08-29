@@ -11,7 +11,7 @@ for v in Vars:
    for fi,f in enumerate(Files):
       ch = TChain('H4GSel')
       ch.Add(f[0])
-      hname = v[0]+'_'+str(fi)
+      hname = v[1]+'_'+str(fi)
       h = TH1F(hname, v[2], v[3], v[4], v[5])
       ch.Draw(v[0]+'>>'+hname, TCut(Cuts))
       h.Sumw2()
