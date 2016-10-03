@@ -192,6 +192,7 @@ class SkimmedTreeTools:
       if dipho == 0: return 0
       else: return [dipho, pho1, pho1_id, pho2, pho2_id]
 
+   # Phos: a list of 4 (and only 4!) TLorentzVectors
    def MakePairing(self, Phos):
       minDM = 100000
       P1 = 0
