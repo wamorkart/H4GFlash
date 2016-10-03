@@ -42,11 +42,12 @@ class SkimmedTreeTools:
       self.tp_mass = n.zeros(1, dtype=float)
       self.dphigh_mass = n.zeros(1, dtype=float)
       self.initialEvents = n.zeros(1, dtype=float)
-      self.evtnumber = n.zeros(1,dtype=int)
-      self.runnumber = n.zeros(1,dtype=int)
-      self.luminumber = n.zeros(1,dtype=int)
+      self.event = n.zeros(1,dtype=int)
+      self.run = n.zeros(1,dtype=int)
+      self.lumi = n.zeros(1,dtype=int)
       self.nvtx = n.zeros(1,dtype=int)
       self.npu = n.zeros(1,dtype=float)
+      
 
    def MakeSkimmedTree(self):
       outTree = TTree("H4GSel", "H4G Selected Events")
@@ -89,13 +90,28 @@ class SkimmedTreeTools:
       outTree.Branch('tp_mass', self.tp_mass, 'tp_mass/D')
       outTree.Branch('dphigh_mass', self.dphigh_mass, 'tphigh_mass/D')
       outTree.Branch('initialEvents', self.initialEvents, 'initialEvents/D')
-      outTree.Branch('event', self.evtnumber, 'event/I')
-      outTree.Branch('run', self.runnumber, 'run/I')
-      outTree.Branch('lumi', self.luminumber, 'lumi/I')
+      outTree.Branch('event', self.event, 'event/I')
+      outTree.Branch('run', self.run, 'run/I')
+      outTree.Branch('lumi', self.lumi, 'lumi/I')
       outTree.Branch('nvtx', self.nvtx, 'nvtx/I')
       outTree.Branch('npu', self.npu, 'npu/D')
 
       return outTree
+
+
+
+   def FillEvent(self, inputTree):
+
+      ObjList = [key.GetName() for key in  inputTree.GetListOfBranches()] 
+      #print " ObjList = ", ObjList
+      
+      for b in ObjList:
+        getattr(self, b)[0] = getattr(inputTree, b)
+        #setattr(self, b + "[0]", getattr(inputTree, b) ) ---> this does not work!!! Remember! Since [0] will not be interpreted as an operation
+   
+            
+
+
 
    def MakePhotonSelection(self, Phos, Phos_id, MVA):
       sPhos = []

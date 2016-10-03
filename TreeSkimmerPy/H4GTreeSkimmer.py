@@ -59,9 +59,9 @@ def main(argv):
       if evt%1000 == 0: print "## Analyzing event ", evt
       tree.GetEntry(evt)
 
-      treeSkimmer.evtnumber[0] = tree.event
-      treeSkimmer.runnumber[0] = tree.run
-      treeSkimmer.luminumber[0] = tree.lumi
+      treeSkimmer.event[0] = tree.event
+      treeSkimmer.run[0] = tree.run
+      treeSkimmer.lumi[0] = tree.lumi
       treeSkimmer.nvtx[0] = tree.nvtx
       treeSkimmer.npu[0] = tree.npu
 
