@@ -106,6 +106,8 @@ def main(argv):
 
       if triggeredDipho == 0: #no diphoton triggered
         continue
+      
+      
 
       treeSkimmer.p1_pt[0] = sPhos[0].Pt()
       treeSkimmer.p2_pt[0] = sPhos[1].Pt()
