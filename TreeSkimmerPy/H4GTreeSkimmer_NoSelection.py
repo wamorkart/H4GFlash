@@ -82,30 +82,16 @@ def main(argv):
 
 
       #Make photon selection first because the triggered photons *must* be selected
-      sPhos,sPhos_id = treeSkimmer.MakePhotonSelection(Phos, Phos_id, tree.v_pho_mva, tree.v_pho_passElectronVeto)
-
-      if nfakes > 0 :
-         fPhos, fPhos_id = treeSkimmer.SelectWithFakes(Phos, Phos_id, tree.v_pho_mva, tree.v_pho_passElectronVeto)
-         if len(fPhos) < nfakes:
-            continue
-         if len(sPhos) < ntotpho - nfakes:
-            continue
-         phomatrix = [[x,y] for x,y in zip(sPhos, sPhos_id)]
-         fakematrix = [[x,y] for x,y in zip(fPhos, fPhos_id)]
-         phomatrixreduced = phomatrix[:(ntotpho-nfakes)]
-         fakematrixreduced = fakematrix[:(nfakes)]
-         totmatrix = phomatrixreduced+fakematrixreduced
-         totmatrix.sort(key=lambda x: x[0].Pt(), reverse=True)
-         sPhos = [x[0] for x in totmatrix]
-         sPhos_id = [x[1] for x in totmatrix]
+      sPhos = Phos
+      sPhos_id = Phos_id# = treeSkimmer.MakePhotonSelection(Phos, Phos_id, tree.v_pho_mva)
 
       if len(sPhos) < ntotpho: continue
 
       #R9, CHIso, HoE, PSeed
       triggeredDipho = treeSkimmer.MakeTriggerSelection(sPhos, sPhos_id, tree.v_pho_full5x5_r9, tree.v_pho_chargedHadronIso, tree.v_pho_hadronicOverEm, tree.v_pho_hasPixelSeed)
 
-      if triggeredDipho == 0: #no diphoton triggered
-        continue
+#      if triggeredDipho == 0: #no diphoton triggered
+#        continue
 
       treeSkimmer.p1_pt[0] = sPhos[0].Pt()
       treeSkimmer.p2_pt[0] = sPhos[1].Pt()

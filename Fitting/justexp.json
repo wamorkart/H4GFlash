@@ -25,7 +25,7 @@
                 "RooFormulaVar:mod_b3_p3_mgg_bb('b3_p3_mgg_bb*b3_p3_mgg_bb', {b3_p3_mgg_bb[0.1, -10, 10]})",
                 "RooBernstein:Bern3_tp_mass(tp_mass, {mod_b3_p0_mgg_bb, mod_b3_p1_mgg_bb, mod_b3_p2_mgg_bb, mod_b3_p3_mgg_bb} )",
 
-		"EXPR::sumExp2_tp_mass(' exp(lb1*tp_mass) - fe2*exp(lb2*tp_mass)', {tp_mass, lb1[0.1, 0.0001, 100], fe2[0.005, 0.0001, 80.], lb2[0.1, 0.00001, 100]})",
+		"EXPR::sumExp2_tp_mass(' exp(lb1*tp_mass) - fe2*exp(lb2*tp_mass)', {tp_mass, lb1[0.1, 0.0001, 100], fe2[0.5, 0.000001, 10000.], lb2[0.005, 0.00001, 100]})",
 
                 "EXPR::PowL_tp_mass('pow(tp_mass, power) + fr2*pow(tp_mass, power2)', {tp_mass, power[2., -10, 10.00001], fr2[0.5, -10, 10], power2[1.2, -10, 10.0001]})",
 
@@ -34,10 +34,10 @@
 		"SUM:sumExp_tp_mass(frac1[4.08756e-02, 0.0001, 1]*exp1_tp_mass, frac2[-4.29406e-03, -100, 0.0001]*exp2_tp_mass)"
 
 	],
-  "functionsToFit" :  ["Bern3_tp_mass", "Bern2_tp_mass", "sumExp2_tp_mass", "PowL_tp_mass"],
-  "functionsToPlot" : ["Bern3_tp_mass", "Bern2_tp_mass", "sumExp2_tp_mass", "PowL_tp_mass"],
-  "biasFunctions" :   ["Bern3_tp_mass", "Bern2_tp_mass", "sumExp2_tp_mass", "PowL_tp_mass"],
-  "functionLegends" : ["3rd Order Bernstein", "2nd Order Bernstein", "Sum of 2 Exponentials", "2nd Order Power Law"],
+  "functionsToFit" :  ["sumExp2_tp_mass"],
+  "functionsToPlot" : ["sumExp2_tp_mass"],
+  "biasFunctions" :   ["sumExp2_tp_mass"],
+  "functionLegends" : ["Sum of 2 Exponentials"],
   "error" : "0",
   "signal_File" : "/afs/cern.ch/work/r/rateixei/work/NEU_H4G/Flashgg/Aug24/CMSSW_8_0_8_patch1/src/flashgg/H4GFlash/TreeSkimmerPy/root/signal_m_50.root",
   "signal_Functions" : [

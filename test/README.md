@@ -96,7 +96,7 @@ File should look like this:
 #### 3) Run!
 ```
 mkdir outDir
-fggRunJobs.py --load ToRun.json -H -D -P -n 500 -d outDir -x cmsRun ../MakeTrees.py maxEvents=-1 -q 1nh --no-use-tarball
+fggRunJobs.py --load ToRun.json -D -P -n 500 -d outDir -x cmsRun ../MakeTrees.py maxEvents=-1 -q 1nh --no-use-tarball
 ```   
 This will submit all the jobs to lxbatch and start a monitoring task. After all jobs have been submitted, feel free to quit it if you want. However, leaving it running will also resubmit jobs that fail for lxbatch reasons. You can continue the monitoring task with:   
 ```

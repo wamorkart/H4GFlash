@@ -82,6 +82,7 @@ int main(int argc, const char* argv[])
   std::vector<std::string> signal_functionsToPlot;
   std::string plotTitle;
   std::vector<std::string> legends;
+  std::vector<std::string> legendsSignal;
   double signal_normalization_lumi_fb;
   double signal_normalization_totEvs;
   double signal_normalization_xsec;
@@ -139,6 +140,10 @@ int main(int argc, const char* argv[])
 
   BOOST_FOREACH( boost::property_tree::ptree::value_type const& rowPair, pt.get_child( "functionLegends" ) ){
     legends.push_back(rowPair.second.data());
+  }
+
+  BOOST_FOREACH( boost::property_tree::ptree::value_type const& rowPair, pt.get_child( "signalLegends" ) ){
+    legendsSignal.push_back(rowPair.second.data());
   }
 
   BOOST_FOREACH( boost::property_tree::ptree::value_type const& rowPair, pt.get_child( "biasFunctions" ) ){
@@ -226,7 +231,7 @@ int main(int argc, const char* argv[])
       
       for( unsigned int i = 0; i < vars.size(); i++){
           std::string sVar = ( (TObjString *) ( (TObjArray *) (TString(vars[i]).Tokenize("[")) )->At(0) )->String().Data();
-          H4GFittingTools::PlotCurves(plotTitle, w, signal_functionsToPlot, signal_functionsToPlot, fitresults, dataSig, sVar, nbins[i], plotsDir+"/signal"+sVar, 1, 0, -1);
+          H4GFittingTools::PlotCurves(plotTitle, w, signal_functionsToPlot, legendsSignal, fitresults, dataSig, sVar, nbins[i], plotsDir+"/signal"+sVar, 0, 0, -1);
           
           //Make signal parameters constant
           for( unsigned int ff = 0; ff < signal_functionsToFit.size(); ff++){
@@ -254,25 +259,31 @@ int main(int argc, const char* argv[])
       }
       
       //Do bias study business: create multipdf, etc
+      
+      TFile * fout = new TFile("bias2d_pdfs.root", "RECREATE");
+      RooWorkspace bW("Analysis2D", "Analysis2D");
+
       RooCategory pdf_index("pdf_index","Index of Pdf which is active");
       RooArgList mypdfs;
+      std::vector<RooRealVar> norms;
       for( unsigned int bias = 0; bias < biasFunctions.size(); bias++){
 	  std::cout << "Adding functions to multipdf! " << biasFunctions[bias].c_str() << std::endl;
 	  const char* modelName = biasFunctions[bias].c_str();
 	  mypdfs.add(* w->pdf( modelName ) );
+          bW.import(* w->pdf(modelName) );
+          RooRealVar thisNorm( TString(biasFunctions[bias] + "_norm"), "Number of background events", 0.0000001, 10000000);
+          norms.push_back(thisNorm);
+          bW.import(norms[norms.size() - 1]);
       }
 //      RooMultiPdf multipdf("roomultipdf", "All Pdfs", pdf_index, mypdfs);
       RooRealVar norm("roomultipdf_norm", "Number of background events", bkgNorm, bkgNorm_down, bkgNorm_up);
 //      RooRealVar norm("roomultipdf_norm", "Number of background events", 0.000001, 5000000);
       
-      //Create bias workspace
-      TFile * fout = new TFile("bias2d_pdfs.root", "RECREATE");
-      RooWorkspace bW("Analysis2D", "Analysis2D");
 //      bW.import(pdf_index);
       bW.import(norm);
 //      bW.import(multipdf);
-//      bW.import( *w->pdf( signalFit.c_str() ) );
-//      bW.import(*data);
+      bW.import( *w->pdf( signalFit.c_str() ) );
+      bW.import(*data);
 //      bW.Print();
       bW.Write();
       fout->Close();

@@ -1,0 +1,8 @@
+{
+    "processes" : {
+        "DoubleEG" : [
+            ["/DoubleEG/ferrif-RunIISpring16DR80X-2_2_0-25ns_ICHEP16_MiniAODv2_p3-2_2_0-v0-Run2016D-PromptReco-v2-9a092465adbfb13c40886e07b86f6d23/USER", {"args" : ["campaign=RunIISpring16DR80X-2_2_0-25ns_ICHEP16_MiniAODv2"]}]
+        ]
+	},
+	"cmdLine" : "processId=Data campaign=RunIISpring16DR80X-2_2_0-25ns_ICHEP16_MiniAODv2 targetLumi=12.7e+3 PURW=False"
+}
