@@ -93,6 +93,7 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       flashgg::GlobalVariablesDumper* globVar_;
 
       //Out tree elements:
+      edm::Service<TFileService> fs;
       TTree* outTree;
       int n_pho, run, lumi, evtnum, passTrigger;
       double rho;
@@ -354,8 +355,9 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    double lumiWeight_ = ( iConfig.getParameter<double>( "lumiWeight" ) );
    globVar_->dumpLumiFactor(lumiWeight_);
    usesResource("TFileService");
-   edm::Service<TFileService> fs;
+//   edm::Service<TFileService> fs;
    outTree = fs->make<TTree> ("H4GTree", "Tree for h->4g analysis");
+
 //   outTree->Branch("run", &run, "run/I");
 //   outTree->Branch("lumi", &lumi, "lumi/I");
 //   outTree->Branch("evtnum", &evtnum, "evtnum/I");

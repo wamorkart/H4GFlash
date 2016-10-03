@@ -31,12 +31,19 @@
 using namespace RooFit;
 
 int colors[] = {kBlue, 632, 417, 616, 432, 800, 820, 840, 860};
-int styles[] = {2, 3, 0, 5, 6, 7, 8, 9};
+int styles[] = {0,2, 3, 5, 6, 7, 8, 9};
 
-void H4GFittingTools::PlotCurves(std::string plotTitle, RooWorkspace* w, std::vector<std::string> functionsToFit, std::vector<std::string> legends, std::vector<H4GFittingTools::FitRes> fitResults, RooDataSet* data, std::string sVar, std::string nbins, std::string plotName, int error, int isBkg, float totNorm)
+void H4GFittingTools::PlotCurves(std::string plotTitle, RooWorkspace* w,
+		std::vector<std::string> functionsToFit, std::vector<std::string> legends,
+		std::vector<H4GFittingTools::FitRes> fitResults, RooDataSet* data, std::string sVar,
+		std::string nbins, std::string plotName, int error, int isBkg, float totNorm)
 {
     RooPlot* frame = w->var(sVar.c_str())->frame(Bins(TString( nbins ).Atoi() ));
-    data->plotOn(frame, DataError(RooAbsData::SumW2));
+    if(isBkg) data->plotOn(frame, DataError(RooAbsData::SumW2));
+    else { 
+       std::cout << "Plotting signal model..." << std::endl;
+       data->plotOn(frame, MarkerStyle(25), DataError(RooAbsData::SumW2));
+    }
     int funcCounter = 0;
 
 //    TStyle * gStyle = new TStyle("a", "a");
@@ -87,7 +94,6 @@ void H4GFittingTools::PlotCurves(std::string plotTitle, RooWorkspace* w, std::ve
             w->pdf( modelName )->plotOn(frame, FillColor( colors[funcCounter]-9 ), VisualizeError(*fitResult, 2, kFALSE));
             w->pdf( modelName )->plotOn(frame, FillColor( colors[funcCounter]-168 ), VisualizeError(*fitResult, 1, kFALSE));
             w->pdf( modelName )->plotOn(frame, LineColor( colors[funcCounter] ), Name(modelName));
-            data->plotOn(frame);
         }
         
         for (unsigned int comp = 0; comp < components.size(); comp++){
@@ -97,6 +103,12 @@ void H4GFittingTools::PlotCurves(std::string plotTitle, RooWorkspace* w, std::ve
         }
 	funcCounter++;
 
+        if(isBkg) data->plotOn(frame, DataError(RooAbsData::SumW2));
+        else {
+           std::cout << "Plotting signal model..." << std::endl;
+           data->plotOn(frame, MarkerStyle(25), DataError(RooAbsData::SumW2));
+        }
+
         leg->SetHeader(plotTitle.c_str());
 	leg->AddEntry( frame->findObject( modelName), legends[ff].c_str(), "l");
         
@@ -105,7 +117,7 @@ void H4GFittingTools::PlotCurves(std::string plotTitle, RooWorkspace* w, std::ve
     TCanvas* c = new TCanvas("a", "a", 1200, 1000);
     frame->SetTitle("");
     frame->Draw();
-    if(TString(sVar).Contains("mgg") && !isBkg){
+    if(TString(sVar).Contains("tp_mass") && !isBkg){
         frame->GetXaxis()->SetRangeUser(115, 135);
     }
     leg->Draw("same");

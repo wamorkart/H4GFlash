@@ -99,7 +99,6 @@ class SkimmedTreeTools:
       return outTree
 
 
-
    def FillEvent(self, inputTree):
 
       ObjList = [key.GetName() for key in  inputTree.GetListOfBranches()] 
@@ -113,28 +112,44 @@ class SkimmedTreeTools:
 
 
 
-   def MakePhotonSelection(self, Phos, Phos_id, MVA):
+   def MakePhotonSelection(self, Phos, Phos_id, MVA, el):
       sPhos = []
       sPhos_id = []
       for i,pho in enumerate(Phos):
          if pho.Pt() < 15: continue
          if abs(pho.Eta()) > 2.5: continue
-         if abs(pho.Eta()) < 1.5 and MVA[Phos_id[i]] < 0.295: continue
-         if abs(pho.Eta()) > 1.5 and MVA[Phos_id[i]] < 0.458: continue
+         if abs(pho.Eta()) < 1.5 and MVA[Phos_id[i]] < 0.374: continue
+         if abs(pho.Eta()) > 1.5 and MVA[Phos_id[i]] < 0.336: continue
+         if el[Phos_id[i]] == 0: continue
 
          sPhos.append(pho)
          sPhos_id.append(Phos_id[i])
 
       return sPhos, sPhos_id
 
-   def SelectWithFakes(self, Phos, Phos_id, MVA):
+   def MakePhotonSelectionCutBased(self, Phos, Phos_id, rho, chiso, nhiso, phiso, hoe, sieie, el):
+      sPhos = []
+      sPhos_id = []
+      for i,pho in enumerate(Phos):
+         if pho.Pt() < 15: continue
+         if abs(pho.Eta()) > 2.5: continue
+         isCutBasedId = self.PhotonCutBasedId(pho, Phos_id[i], rho, chiso, nhiso, phiso, hoe, sieie, el)
+         if isCutBasedId == 0: continue
+
+         sPhos.append(pho)
+         sPhos_id.append(Phos_id[i])
+
+      return sPhos, sPhos_id
+
+   def SelectWithFakes(self, Phos, Phos_id, MVA, el):
       fPhos = []
       fPhos_id = []
       for i,pho in enumerate(Phos):
          if pho.Pt() < 15: continue
          if abs(pho.Eta()) > 2.5: continue
-         if abs(pho.Eta()) < 1.5 and MVA[Phos_id[i]] > 0.295: continue
-         if abs(pho.Eta()) > 1.5 and MVA[Phos_id[i]] > 0.458: continue
+         if abs(pho.Eta()) < 1.5 and MVA[Phos_id[i]] > 0.374: continue
+         if abs(pho.Eta()) > 1.5 and MVA[Phos_id[i]] > 0.336: continue
+         if el[Phos_id[i]] == 0: continue
 
          fPhos.append(pho)
          fPhos_id.append(Phos_id[i])
@@ -216,4 +231,45 @@ class SkimmedTreeTools:
       if(DEBUG): print 'minDr:', abs(Dipho1.M() - Dipho2.M()), iP1, iP2, iP3, iP4
       arr = [[Dipho1, P1, iP1, P2, iP2], [Dipho2, P3, iP3, P4, iP4]]
       return arr
+
+   def PhotonCutBasedId(self, pho, pho_id, rho, chiso, nhiso, phiso, hoe, sieie, el):
+      EA = [[0 for x in range(3)] for y in range(7)]
+      EA[0][0] = 0.0; EA[0][1] = 0.0599; EA[0][2] = 0.1271;
+      EA[1][0] = 0.0; EA[1][1] = 0.0819; EA[1][2] = 0.1101;
+      EA[2][0] = 0.0; EA[2][1] = 0.0696; EA[2][2] = 0.0756;
+      EA[3][0] = 0.0; EA[3][1] = 0.0360; EA[3][2] = 0.1175;
+      EA[4][0] = 0.0; EA[4][1] = 0.0360; EA[4][2] = 0.1498;
+      EA[5][0] = 0.0; EA[5][1] = 0.0462; EA[5][2] = 0.1857;
+      EA[6][0] = 0.0; EA[6][1] = 0.0656; EA[6][2] = 0.2183;
+
+      feta = abs(pho.Eta())
+      whichEA = ""
+
+      if(feta > 0.000 and feta < 1.000 ): whichEA = EA[0]
+      if(feta > 1.000 and feta < 1.479 ): whichEA = EA[1]
+      if(feta > 1.479 and feta < 2.000 ): whichEA = EA[2]
+      if(feta > 2.000 and feta < 2.200 ): whichEA = EA[3]
+      if(feta > 2.200 and feta < 2.300 ): whichEA = EA[4]
+      if(feta > 2.300 and feta < 2.400 ): whichEA = EA[5]
+      if(feta > 2.400 and feta < 10.00 ): whichEA = EA[6]
+
+      nhiso_corr = max(nhiso[pho_id] - rho*whichEA[1], 0)
+      phiso_corr = max(nhiso[pho_id] - rho*whichEA[2], 0)
+
+      if feta < 1.5:
+         if hoe[pho_id] > 0.05: return 0
+         if sieie[pho_id] > 0.0102: return 0
+         if chiso[pho_id] > 3.32: return 0
+         if nhiso_corr > (1.92 + 0.014*pho.Pt() + 0.000019*pho.Pt()*pho.Pt()): return 0
+         if phiso_corr > (0.81 + 0.0053*pho.Pt()): return 0
+      if feta > 1.5:
+         if hoe[pho_id] > 0.05: return 0
+         if sieie[pho_id] > 0.0274: return 0
+         if chiso[pho_id] > 1.97: return 0
+         if nhiso_corr > (11.86 + 0.0139*pho.Pt() + 0.000025*pho.Pt()*pho.Pt()): return 0
+         if phiso_corr > (0.83 + 0.0034*pho.Pt()): return 0
+
+      if el[pho_id] == 0: return 0
+      return 1
+      
 

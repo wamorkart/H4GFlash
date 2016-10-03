@@ -57,6 +57,26 @@ if __name__ == '__main__':
   
     treeSkimmer.FillEvent(itree)
 
+    itree.GetEntry(evt+1)
+    
+    # (1) and (2) from the next one
+    ObjList = [key.GetName() for key in  itree.GetListOfBranches()]  
+    #for branch in ObjList:
+      #if branch.startswith("p1_")  or  branch.startswith("p2_") :
+        #getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
+    for branch in ObjList:
+      nameToSearch1 = "p" + dp1_p1i + "_"
+      nameToSearch1.replace(' ', '')
+      nameToSearch2 = "p" + dp2_p1i + "_"
+      nameToSearch2.replace(' ', '')
+      if branch.startswith(nameToSearch1)  or  branch.startswith(nameToSearch2) :
+        getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
+        
+            
+      
+
+
+
 
     
     otree.Fill()

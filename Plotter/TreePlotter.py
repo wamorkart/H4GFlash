@@ -6,7 +6,6 @@ for v in Vars:
    hists = []
    leg = TLegend(0.6, 0.7, 0.89, 0.89)
    leg.SetBorderSize(0)
-   c0 = TCanvas('a', 'a', 800, 600)
    Max = -0.
    for fi,f in enumerate(Files):
       ch = TChain('H4GSel')
@@ -23,9 +22,11 @@ for v in Vars:
       if h.GetMaximum() > Max:
          Max = h.GetMaximum()
    print Max
-   for hh in hists:
+
+   c0 = TCanvas('a', 'a', 800, 600)
+   for fi,hh in enumerate(hists):
       leg.AddEntry(hh[0], hh[2], 'lf')
-      hh[0].SetMaximum(Max*1.2)
+      hh[0].SetMaximum(Max*1.5)
       hh[0].SetMinimum(0.0001)
       if fi == 0:
          hh[0].Draw('h')
