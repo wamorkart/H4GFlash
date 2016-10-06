@@ -59,36 +59,90 @@ if __name__ == '__main__':
   
     treeSkimmer.FillEvent(itree)
 
-    #dp1_p1i = itree.dp1_p1i
-    #dp2_p1i = itree.dp2_p1i
+    dp1_p1i = itree.dp1_p1i
+    dp1_p2i = itree.dp1_p2i
+    dp2_p1i = itree.dp2_p1i
+    dp2_p2i = itree.dp2_p2i
 
-    dp1_p1i = 1
-    dp2_p1i = 2
+    #dp1_p1i = 1
+    #dp2_p1i = 2
 
  
     #print " dp2_p1i = ", dp2_p1i, "   dp1_p1i  = ", dp1_p1i, 
     
     # if it is the last event, pick the shuffled from the first event
+    #if evt == eventsToRun :
+      #itree.GetEntry(0)
+    #else :
+      #itree.GetEntry(evt+1)
+    
+    #print " ---> dp2_p1i = ", dp2_p1i, "   dp1_p1i  = ", dp1_p1i
+    
+    ## (1) and (2) from the next one
+    #ObjList = [key.GetName() for key in  itree.GetListOfBranches()]  
+    ##for branch in ObjList:
+      ##if branch.startswith("p1_")  or  branch.startswith("p2_") :
+        ##getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
+    #for branch in ObjList:
+      #nameToSearch1 = "p" + str(dp1_p1i) + "_"
+      #nameToSearch1.replace(' ', '')
+      #nameToSearch2 = "p" + str(dp2_p1i) + "_"
+      #nameToSearch2.replace(' ', '')
+      #if branch.startswith(nameToSearch1)  or  branch.startswith(nameToSearch2) :
+        #getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
+        
+        
+        
+        
     if evt == eventsToRun :
       itree.GetEntry(0)
     else :
       itree.GetEntry(evt+1)
-    
-    #print " ---> dp2_p1i = ", dp2_p1i, "   dp1_p1i  = ", dp1_p1i
-    
-    # (1) and (2) from the next one
+            
     ObjList = [key.GetName() for key in  itree.GetListOfBranches()]  
-    #for branch in ObjList:
-      #if branch.startswith("p1_")  or  branch.startswith("p2_") :
-        #getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
     for branch in ObjList:
-      nameToSearch1 = "p" + str(dp1_p1i) + "_"
+      nameToSearch1 = "p" + str(dp1_p2i) + "_"
       nameToSearch1.replace(' ', '')
-      nameToSearch2 = "p" + str(dp2_p1i) + "_"
-      nameToSearch2.replace(' ', '')
-      if branch.startswith(nameToSearch1)  or  branch.startswith(nameToSearch2) :
+      if branch.startswith(nameToSearch1) :
         getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
         
+        
+    if evt == eventsToRun :
+      itree.GetEntry(1)
+    elif evt == (eventsToRun-1) :
+      itree.GetEntry(0)
+    else :
+      itree.GetEntry(evt+2)
+            
+    ObjList = [key.GetName() for key in  itree.GetListOfBranches()]  
+    for branch in ObjList:
+      nameToSearch1 = "p" + str(dp2_p1i) + "_"
+      nameToSearch1.replace(' ', '')
+      if branch.startswith(nameToSearch1) :
+        getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
+
+
+    if evt == eventsToRun :
+      itree.GetEntry(2)
+    elif evt == (eventsToRun-1) :
+      itree.GetEntry(1)
+    elif evt == (eventsToRun-2) :
+      itree.GetEntry(0)
+    else :
+      itree.GetEntry(evt+3)
+            
+    ObjList = [key.GetName() for key in  itree.GetListOfBranches()]  
+    for branch in ObjList:
+      nameToSearch1 = "p" + str(dp2_p2i) + "_"
+      nameToSearch1.replace(' ', '')
+      if branch.startswith(nameToSearch1) :
+        getattr(treeSkimmer, branch)[0] = getattr(itree, branch)
+
+   
+     
+     
+     
+     
         
         
         
