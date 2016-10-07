@@ -12,6 +12,10 @@ Idea: mix odd and even events to create a blinded "real data" phase space, with 
     python H4GTreeMixing.py   --inputFile /tmp/amassiro/eos/user/t/torimoto/4gamma/SkimmedTrees/Oct6/signal_m_25.root     --outputFile    mytest_25.root
     python H4GTreeMixing.py   --inputFile /tmp/amassiro/eos/user/t/torimoto/4gamma/SkimmedTrees/Oct6/signal_m_60.root     --outputFile    mytest_60.root
     
+    python H4GTreeMixing.py   --inputFile /tmp/amassiro/eos/user/t/torimoto/4gamma/SkimmedTrees/Oct6/ggjjControlRegion.root    --outputFile    /tmp/amassiro/controlregion.root
+    
+    
+    
 plot:
     
     r99t mytest_15.root mytest_25.root mytest_60.root 
@@ -50,6 +54,38 @@ plot:
     
     
     
+    
+    r99t  /tmp/amassiro/controlregion.root  /tmp/amassiro/eos/user/t/torimoto/4gamma/SkimmedTrees/Oct6/ggjjControlRegion.root
+    
+    
+    tree1 = (TTree*) _file0->Get("H4GSel")
+    tree2 = (TTree*) _file1->Get("H4GSel")
+    
+    tree1->Draw("tp_mass >> h1(100,0,700)",  "p1_pt > 30  &&   p2_pt > 20");
+    tree2->Draw("tp_mass >> h2(100,0,700)",  "p1_pt > 30  &&   p2_pt > 20");
+    
+    h1->SetLineColor(kBlue)
+    h2->SetLineColor(kPink)
+        
+    h1->SetLineWidth(2)
+    h2->SetLineWidth(2)
+    
+    h1->Scale(1./h1->Integral())
+    h2->Scale(1./h2->Integral())
+    
+    h2->Draw()
+    h1->Draw("same")
+    
+    h1->SetTitle("mixed")
+    h2->SetTitle("original")
+    
+    gPad->BuildLegend()
+
+
+    
+    
+    
+    
     r99t mytest_15.root  /tmp/amassiro/eos/user/t/torimoto/4gamma/SkimmedTrees/Oct6/signal_m_15.root
     
     
@@ -68,8 +104,8 @@ plot:
     h1->Scale(1./h1->Integral())
     h2->Scale(1./h2->Integral())
     
-    h1->Draw()
-    h2->Draw("same")
+    h2->Draw()
+    h1->Draw("same")
     
     h1->SetTitle("mixed")
     h2->SetTitle("original")
@@ -130,8 +166,8 @@ plot:
     h1->Scale(1./h1->Integral())
     h2->Scale(1./h2->Integral())
     
-    h1->Draw()
-    h2->Draw("same")
+    h2->Draw()
+    h1->Draw("same")
     
     h1->SetTitle("mixed")
     h2->SetTitle("original")
