@@ -86,8 +86,9 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       edm::EDGetTokenT<edm::View<flashgg::DiPhotonCandidate> > diphotonsToken_;
       edm::EDGetTokenT<edm::View<pat::PackedGenParticle> > genPhotonsToken_;
       edm::EDGetTokenT<edm::View<reco::GenParticle> > genParticlesToken_;
-      
+      edm::EDGetTokenT<GenEventInfoProduct> genInfoToken_;
       edm::EDGetTokenT<edm::TriggerResults> triggerToken_;
+      edm::InputTag genInfo_;
       long int counter;
 
       flashgg::GlobalVariablesDumper* globVar_;
@@ -321,6 +322,8 @@ class H4GFlash : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
       std::vector<float> v_pho_mva;
       std::map<std::string, int> myTriggerResults;
 
+      double genTotalWeight;
+
       //Parameters
       std::vector<std::string> myTriggers;
 
@@ -351,6 +354,8 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
     genParticlesToken_( consumes<edm::View<reco::GenParticle> >( iConfig.getUntrackedParameter<edm::InputTag>( "genparticles", edm::InputTag( "prunedGenParticles" ) ) ) )
 {
    //now do what ever initialization is needed
+   genInfo_ = iConfig.getUntrackedParameter<edm::InputTag>( "genInfo", edm::InputTag("generator") );
+   genInfoToken_ = consumes<GenEventInfoProduct>( genInfo_ );
    globVar_ = new flashgg::GlobalVariablesDumper(iConfig, consumesCollector() );
    double lumiWeight_ = ( iConfig.getParameter<double>( "lumiWeight" ) );
    globVar_->dumpLumiFactor(lumiWeight_);
@@ -560,6 +565,7 @@ H4GFlash::H4GFlash(const edm::ParameterSet& iConfig):
    outTree->Branch("v_pho_deta", &v_pho_deta);
    outTree->Branch("v_pho_cutid", &v_pho_cutid);
    outTree->Branch("v_pho_mva", &v_pho_mva);
+   outTree->Branch("genTotalWeight", &genTotalWeight, "genTotalWeight/D");
    
    outTree->Branch("myTriggerResults", &myTriggerResults);
 
@@ -633,6 +639,7 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     if (!acceptedTriggers) passTrigger = 0;
 
    //Initialize tree variables
+   genTotalWeight = 1.0;
    n_pho = 0;
    v_pho_p4.clear();
    v_genpho_p4.clear();
@@ -1138,6 +1145,9 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
    }
    
    if( ! iEvent.isRealData() ) {
+      iEvent.getByToken(genInfoToken_, genInfo);
+      genTotalWeight = genInfo->weight();
+
       edm::Handle<edm::View<pat::PackedGenParticle> > genPhotons;
       iEvent.getByToken(genPhotonsToken_,genPhotons);
       // ---- Save prompt photon gen information
