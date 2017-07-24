@@ -99,7 +99,7 @@ def main(argv):
          sPhos = [x[0] for x in totmatrix]
          sPhos_id = [x[1] for x in totmatrix]
 
-      if len(sPhos) < ntotpho: continue
+      if len(sPhos) < ntotpho: continue # ntotpho, i.e total number of photons should always be =4
 
       #R9, CHIso, HoE, PSeed
       triggeredDipho = treeSkimmer.MakeTriggerSelection(sPhos, sPhos_id, tree.v_pho_full5x5_r9, tree.v_pho_chargedHadronIso, tree.v_pho_hadronicOverEm, tree.v_pho_hasPixelSeed)
