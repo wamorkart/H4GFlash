@@ -920,7 +920,7 @@ H4GFlash::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 //      v_pho_subClusDEta3.push_back      ( pho->subClusDEta3() ); 
      v_pho_iPhi.push_back              ( pho->iPhi() ); 
      v_pho_iEta.push_back              ( pho->iEta() ); 
-     v_pho_r9.push_back                ( pho->r9() ); 
+     v_pho_r9.push_back                ( pho->old_r9() ); 
      v_pho_full5x5_r9.push_back        ( pho->full5x5_r9() ); 
      
      
